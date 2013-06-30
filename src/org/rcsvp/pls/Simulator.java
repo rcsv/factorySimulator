@@ -19,7 +19,12 @@ public class Simulator {
 		// 工場には工場長初め、班長さんに掃除をしている人等、様々な人が勤務していますので、
 		// 膨大な情報を持つ必要があるかもしれません。
 		//
-		IFactory factory = new Factory( "MyFactory" ) ;
+		IFactory factory = new Factory( "Sample Factory" ) ;
+	
+		//
+		// 更に、集中管理盤というものを用意します。
+		//
+		ControlCenter cc = ControlCenter.getInstance() ;
 		
 		//
 		// 次に「工場」が持つであろう「生産ライン」というものをオブジェクト化してみます。生産ライ
@@ -33,6 +38,8 @@ public class Simulator {
 		// 今回のラインのタクトタイムは 45 秒、ということにします。
 		//
 		IProductionLine line1 = new ProductionLine( "鉄の箱１", 45 ) ;
+
+		
 		
 		//
 		// さて、工場の製造ラインは一つではないハズです。同じ製品を作っている生産ラインを表現する
@@ -49,6 +56,7 @@ public class Simulator {
 		factory.register ( line1 ) ;
 		factory.register ( line2 ) ;
 		
+		/*
 		//
 		// 生産ラインは、毎月、または毎日、取引先からの供給要望に応じて生産量を決定します。生産ラ
 		// インはその要望に応じて、操業を継続していく事になります。タクトタイムに応じて、そのノル
@@ -57,22 +65,6 @@ public class Simulator {
 		//
 		line1.setNorm( 400 ) ; // line1 の今回（今日？今月？）の生産量は 400 です。
 		line2.setNorm( 300 ) ; // line2 の今回（今日？今月？）の生産量は 300 となりました。
-
-		//
-		// 生産ラインの最初の工程の近くには、それぞれ加工を開始するための「最初の材料が置いてある
-		// 棚」がある筈です。棚は製造工程から「材料頂戴！」と言われれば、自動で反応しなければなり
-		// ませんが、棚自身が自分で足らなくなった材料を拡充するとか聞いた事がありませんので、
-		// こいつ自体が材料を拡充する方式にはしたくありません。ここでは二つの棚を用意します。各々
-		// の棚は、場所の関係上材料を確保しておく最大量が違います。
-		//
-		IShelf shelf4line1 = new Shelf( "鉄の塊の素", 100 ) ;
-		IShelf shelf4line2 = new Shelf( "鉄の塊の素", 80  ) ;
-		
-		//
-		// 材料棚を登録します。
-		//
-		line1.register ( shelf4line1 ) ;
-		line2.register ( shelf4line2 ) ;
 
 		//
 		// 確認さんは、担当しているラインの状況を観察し、材料が不足していたら AVG を呼び寄せる、
@@ -95,9 +87,10 @@ public class Simulator {
 		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		//
 		// 今回の構成要素を紐解くと:
-		// IFactory - IProductionLine - IShelf
+		// IFactory - IProductionLine 
 		//							  - IProcedure - IDisposable
 		//										   - ICheck
+		//										   - IShelf
 		//			- ISurveyllance
 		//          - AGV?
 		//
@@ -123,6 +116,9 @@ public class Simulator {
 		line2.register( proc21 ) ;
 		line2.register( proc22 ) ;
 
+		//
+		// 各工程では、きちんと製造加工が施されたかどうか、確認する事が必要になります。
+		//
 		ICheck c11 = new CheckDesign( "悦に浸れるか否か" ) ;
 		ICheck c12 = new CheckSize  ( "サイズが適合しているか否か", 10, 20 ) ;
 		ICheck c13 = new CheckLength( "長さが許容範囲内か否か", 10, 20 ) ;
@@ -149,6 +145,7 @@ public class Simulator {
 		proc22.register( c15 ) ;
 		proc22.register( c16 ) ;
 
+		
 		//
 		// それぞれの工程に消耗品をひとつづつ登録しておきます。
 		//
@@ -157,7 +154,36 @@ public class Simulator {
 		
 		proc11.register( dispo1 ) ;
 		proc12.register( dispo2 ) ;
-
+		
+		//
+		// 生産ラインの最初の工程の近くには、それぞれ加工を開始するための「最初の材料が置いてある
+		// 棚」がある筈です。棚は製造工程から「材料頂戴！」と言われれば、自動で反応しなければなり
+		// ませんが、棚自身が自分で足らなくなった材料を拡充するとか聞いた事がありませんので、
+		// こいつ自体が材料を拡充する方式にはしたくありません。ここでは二つの棚を用意します。各々
+		// の棚は、場所の関係上材料を確保しておく最大量が違います。
+		//
+		IShelf shelf4line1 = new Shelf( "鉄の塊の素", 100 ) ;
+		IShelf shelf4line2 = new Shelf( "鉄の塊の素", 80  ) ;
+		
+		//
+		// 材料棚を登録します。
+		//
+		proc11.register ( shelf4line1 ) ;
+		proc21.register ( shelf4line2 ) ;
+		
+		//
+		// ひょっとするとというかひょっとしなくても、途中でまた追加で材料が必要な製造ラインって
+		// いうものはあると考えられます。ここでは更に別の材質のものを圧入でくっつけるという作業
+		// を想定します。
+		IShelf shelf4proc12 = new Shelf( "例えば別の材質１", 120 ) ;
+		IShelf shelf4proc22 = new Shelf( "例えば別の材質２", 120 ) ;
+		
+		//
+		// それぞれの製造ラインの２工程目に登録します。
+		//
+		proc12.register( shelf4proc12 ) ;
+		proc22.register( shelf4proc22 ) ;
+		*/
 		//
 		// これで Factory を Root にして、ツリー状態になっているので、ここから
 		// factory.start() ;
@@ -166,6 +192,9 @@ public class Simulator {
 		//
 		// ここまで適当にクラスや階層図を書いたところで、
 		// Thread とそれなりな Interface 設計があればシンプルになるかもしれないね。
+		
+		new Thread( factory ).start() ;
+
 	}
 }
 
