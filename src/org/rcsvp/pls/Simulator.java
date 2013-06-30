@@ -32,14 +32,14 @@ public class Simulator {
 		//
 		// 今回のラインのタクトタイムは 45 秒、ということにします。
 		//
-		IProductionLine line1 = new ProductionLine( "鉄の箱", 45 ) ;
+		IProductionLine line1 = new ProductionLine( "鉄の箱１", 45 ) ;
 		
 		//
 		// さて、工場の製造ラインは一つではないハズです。同じ製品を作っている生産ラインを表現する
 		// ため、同じ手法でオブジェクト化を試みます。同じラインなのですが、設備が古いため、タクト
 		// タイムは 60 秒必要、ということにします。
 		// 
-		IProductionLine line2 = new ProductionLine( "鉄の塊", 60 ) ;
+		IProductionLine line2 = new ProductionLine( "鉄の塊２", 60 ) ;
 		
 		//
 		// 常に参照渡しだったと思うので、生産ラインを一旦工場の者として登録しておきます。この工場
