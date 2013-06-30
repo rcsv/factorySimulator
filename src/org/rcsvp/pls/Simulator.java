@@ -7,7 +7,7 @@ package org.rcsvp.pls;
  * 今回の Production Line Simulator 構想を練るための基本クラス。当面はこの操作順序をベースに
  * したオブジェクトの拡充、クラスの拡充がメインとなっていくと考えられる。
  * 
- * @author Tomohiro AWANE <Awane.Tomohiro@me.com>
+ * @author
  *
  */
 public class Simulator {
