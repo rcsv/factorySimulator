@@ -8,7 +8,7 @@ package org.rcsvp.pls;
  */
 public enum Status {
 
-  /**
+	/**
 	 * あらゆる状態について、準備 OK な場合、このステータスが設定されます。一日の始めは Ready。
 	 * ラジオ体操が終われば、Ready から一つ一つ生産に入ります。
 	 */
