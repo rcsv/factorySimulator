@@ -11,47 +11,47 @@ import java.util.Date;
  */
 public class Logger {
 
-	public static void debugWrite ( String msg ) {
+	public static void debugWrite(String msg) {
 		write(msg, VerboseLevel.Debug);
 	}
 
-	public static void infoWrite ( String msg ) {
+	public static void infoWrite(String msg) {
 		write(msg, VerboseLevel.Info);
 	}
 
-	public static void noticeWrite ( String msg ) {
+	public static void noticeWrite(String msg) {
 		write(msg, VerboseLevel.Notice);
 	}
 
-	public static void warnWrite ( String msg ) {
+	public static void warnWrite(String msg) {
 		write(msg, VerboseLevel.Warn);
 	}
 
-	public static void errorWrite ( String msg ) {
+	public static void errorWrite(String msg) {
 		write(msg, VerboseLevel.Error);
 	}
 
-	public static void abendWrite ( String msg ) {
+	public static void abendWrite(String msg) {
 		write(msg, VerboseLevel.Abend);
 	}
 
 	/**
 	 * コンストラクタ自重。
 	 */
-	private Logger () {
+	private Logger() {
 	}
 
 	/**
 	 * べらべら度合いを変更するスイッチ。デフォルトはご注意レベルを表示します。。
 	 */
-	public static VerboseLevel	lv	= VerboseLevel.Notice;
+	public static VerboseLevel lv = VerboseLevel.Notice;
 
 	/**
 	 * 共通部品。
 	 * 
 	 * @param msg
 	 */
-	private static void write ( String msg, VerboseLevel x ) {
+	private static void write(String msg, VerboseLevel x) {
 		if (lv.ordinal() <= x.ordinal()) {
 			System.out.println("[" + new Date() + "] " + msg);
 		}

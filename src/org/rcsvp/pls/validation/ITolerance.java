@@ -14,14 +14,14 @@ public interface ITolerance {
 	 * 
 	 * @return 許容値の公差
 	 */
-	double getToleranceRange ();
+	double getToleranceRange();
 
 	/**
 	 * 公差の基準となる数値を返します。
 	 * 
 	 * @return 許容値の基準値
 	 */
-	double getOffset ();
+	double getOffset();
 
 	/**
 	 * 公差のタイプによって、内部に保有している情報の扱い方が異なる場合があるため、列挙型で定義しています。 それぞれ、寸法、幾何、電気抵抗の種類です。
@@ -53,5 +53,5 @@ public interface ITolerance {
 	 *         (ToleranceType.Geometric)、電気抵抗（ToleranceType.Electrical）等。
 	 * @see org.org.rcsvp.pls.validation.ITolerance.ToleranceType
 	 */
-	ToleranceType getType ();
+	ToleranceType getType();
 }

@@ -27,7 +27,7 @@ public interface IProcedure extends Runnable {
 	 * @param shelf
 	 *            使用する在庫棚
 	 */
-	void register ( IShelf shelf );
+	void register(IShelf shelf);
 
 	/**
 	 * 各工程で使用する消耗品を登録します。消耗品も在庫棚同様、一つも消耗品がない場合もあれば、複数の消耗品で構成されている工程も存在します。
@@ -35,15 +35,16 @@ public interface IProcedure extends Runnable {
 	 * @param dispo
 	 *            IDisposable インターフェイスを実装したクラスのインスタンス。
 	 */
-	void register ( IDisposable dispo );
+	void register(IDisposable dispo);
 
 	/**
 	 * 各工程で加工が完了した後に検証する項目を登録します。
 	 * 
-	 * @param verify IVerify インターフェイスを実装したクラスのインスタンス。
+	 * @param verify
+	 *            IVerify インターフェイスを実装したクラスのインスタンス。
 	 */
-	void register ( IVerify verify ) ;
-	
+	void register(IVerify verify);
+
 	/**
 	 * ProcedureStatus は、各工程が持つであろう状態を表現しています。
 	 * 前工程の材料待ち、工程での作業中、作業を失敗して復旧できない状態にある。 電源がオフである、といった状態が考えられます。

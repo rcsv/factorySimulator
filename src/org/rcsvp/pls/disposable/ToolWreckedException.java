@@ -9,13 +9,13 @@ package org.rcsvp.pls.disposable;
  */
 public class ToolWreckedException extends Exception {
 
-	public ToolWreckedException ( String message ) {
+	public ToolWreckedException(String message) {
 		super(message);
 	}
 
 	/**
 	 * serializable なので。
 	 */
-	private static final long	serialVersionUID	= -2916458182732374805L;
+	private static final long serialVersionUID = -2916458182732374805L;
 
 }

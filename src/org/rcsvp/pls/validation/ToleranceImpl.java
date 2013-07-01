@@ -11,11 +11,11 @@ public class ToleranceImpl implements ITolerance {
 	/**
 	 * 公差タイプを保持する。
 	 */
-	private ToleranceType	type;
+	private ToleranceType type;
 
-	private double			offset;
+	private double offset;
 
-	private double			tolerance;
+	private double tolerance;
 
 	/**
 	 * 当該コンストラクタは公差の種別、基準値と公差の３種類の情報を保持します。
@@ -27,24 +27,24 @@ public class ToleranceImpl implements ITolerance {
 	 * @param tolerance
 	 *            公差。
 	 */
-	public ToleranceImpl ( ToleranceType type, double offset, double tolerance ) {
+	public ToleranceImpl(ToleranceType type, double offset, double tolerance) {
 		this.type = type;
 		this.offset = offset;
 		this.tolerance = tolerance;
 	}
 
 	@Override
-	public double getToleranceRange () {
+	public double getToleranceRange() {
 		return tolerance;
 	}
 
 	@Override
-	public double getOffset () {
+	public double getOffset() {
 		return this.offset;
 	}
 
 	@Override
-	public ToleranceType getType () {
+	public ToleranceType getType() {
 		return this.type;
 	}
 

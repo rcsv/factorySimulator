@@ -13,14 +13,14 @@ public interface IShelf {
 	 * 在庫を切らして、次の在庫を補充するための警告閾値を設定しています。 在庫保持上限が 10
 	 * 個のようなあまりにも低い在庫保持状況の工程でこの数値を使用した場合、 0 になりやすくなります。
 	 */
-	float	threshold	= 0.125f;
+	float threshold = 0.125f;
 
 	/**
 	 * 在庫棚から、材料をひとつだけ取り出して使用します。
 	 * 
 	 * @return インスタンス化された IMaterial 実装オブジェクト
 	 */
-	IMaterial getMaterial ()
+	IMaterial getMaterial()
 	// 実装の困難さがあるのでやめておきます。
 	// throws InsufficientMaterialsException
 	;
@@ -28,14 +28,14 @@ public interface IShelf {
 	/**
 	 * 在庫棚に在庫を補充します。 材料がなくなる前に補充できれば良い状態。
 	 */
-	void appendMaterials ();
+	void appendMaterials();
 
 	/**
 	 * 在庫棚の状況を取得する機構です。 これは流石に集中管理版でなんとかなるものではありません。 従業員が現認して、状況を確認しなければなりません。
 	 * 
 	 * @return ShelfStatus で定義された在庫棚の充足状況。
 	 */
-	ShelfStatus getStatus ();
+	ShelfStatus getStatus();
 
 	/**
 	 * 材料の在庫状況を保持する列挙型です。IDisposable の消耗品の状態同様、大きく 3 段階に分類されています。 1. Sufficient

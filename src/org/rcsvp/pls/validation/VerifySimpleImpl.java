@@ -12,12 +12,12 @@ import org.rcsvp.pls.material.IMaterial;
  */
 public class VerifySimpleImpl extends VerifyAbst {
 
-	public VerifySimpleImpl ( String name, ITolerance tolerance ) {
+	public VerifySimpleImpl(String name, ITolerance tolerance) {
 		super(name, tolerance);
 	}
 
 	@Override
-	protected VerifyResult verifyDetails ( IMaterial material ) {
+	protected VerifyResult verifyDetails(IMaterial material) {
 
 		Random rand = new Random();
 		VerifyResult ret = null;

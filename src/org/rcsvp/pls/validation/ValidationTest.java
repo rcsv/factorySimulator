@@ -10,7 +10,7 @@ public class ValidationTest {
 	 * 
 	 * @param args
 	 */
-	public static void main ( String[] args ) {
+	public static void main(String[] args) {
 		Logger.lv = Logger.VerboseLevel.Debug;
 
 		Logger.debugWrite("this is debug test.");

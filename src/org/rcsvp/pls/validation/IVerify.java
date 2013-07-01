@@ -22,14 +22,14 @@ public interface IVerify {
 	 * @return 問題がなければ、VerifyResult.OK、問題があれば、VerifyResult.NG が戻ります。
 	 * @see org.rcsvp.pls.validation.IVerify.VerifyResult
 	 */
-	VerifyResult verify ( IMaterial material );
+	VerifyResult verify(IMaterial material);
 
 	/**
 	 * 検証項目が保有する公差の情報を取得します。
 	 * 
 	 * @return ITolerance インターフェイスを実装した、公差に関する情報
 	 */
-	ITolerance getTolerance ();
+	ITolerance getTolerance();
 
 	/**
 	 * VerifyResult は当該検査項目の結果を返します。OK / NG の 2 種類のみです。
