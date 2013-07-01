@@ -13,7 +13,7 @@ public interface IDisposable {
 	 * 破損までの一般的な警告閾値を設定しています。 使用限界数が 10 回以下のような、 あまりにも低いツールの場合はこの閾値を使用した場合、
 	 * 必ず破損まで使用してしまいます。
 	 */
-	float threshold = 0.125f;
+	float	threshold	= 0.125f;
 
 	/**
 	 * 道具は使われる運命にあります。 一時は破損した場合に何らかの例外を投げることを考えていましたが、
@@ -22,20 +22,20 @@ public interface IDisposable {
 	 * @throws ToolWreckedException
 	 *             ツールが破損したことを伝える例外。
 	 */
-	void use() throws ToolWreckedException;
+	void use () throws ToolWreckedException;
 
 	/**
 	 * 道具が損耗上限に達した際には、該当する消耗品は交換するか、修復するかをする必要があります。
 	 * 道具自体はアラートを上げることは無いので、時々見に行くしかないのかもしれません。
 	 */
-	void repair();
+	void repair ();
 
 	/**
 	 * 消耗品の劣化具合を検査する機構です。 使用している工程が定期的に監視しているような状態になればいいと考えます。
 	 * 
 	 * @return DisposableStatus で定義された消耗品の状態。
 	 */
-	DisposableStatus getStatus();
+	DisposableStatus getStatus ();
 
 	/**
 	 * 消耗品の状態を保持する列挙型です。消耗品の状態は大きく３段階に分かれています。 1. Work -

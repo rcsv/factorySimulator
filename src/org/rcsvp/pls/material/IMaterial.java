@@ -1,4 +1,4 @@
-package org.rcsvp.pls;
+package org.rcsvp.pls.material;
 
 import org.rcsvp.pls.validation.IVerify;
 
@@ -15,7 +15,7 @@ public interface IMaterial {
 	 * 
 	 * @param verify
 	 */
-	void addVerificationStack(IVerify verify);
+	void addVerificationStack ( IVerify verify );
 
 	/**
 	 * 各製造工程で、追加で材料を付与することを表現します。
@@ -23,6 +23,6 @@ public interface IMaterial {
 	 * @param subMaterial
 	 *            連結対象となる、別の材料。
 	 */
-	void addAnotherMaterial(IMaterial subMaterial);
+	void addAnotherMaterial ( IMaterial subMaterial );
 
 }

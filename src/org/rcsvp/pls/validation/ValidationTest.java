@@ -1,7 +1,7 @@
 package org.rcsvp.pls.validation;
 
 import org.rcsvp.pls.Logger;
-import org.rcsvp.pls.Material;
+import org.rcsvp.pls.material.Material;
 import org.rcsvp.pls.validation.ITolerance.ToleranceType;
 
 public class ValidationTest {
@@ -10,7 +10,7 @@ public class ValidationTest {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main ( String[] args ) {
 		Logger.lv = Logger.VerboseLevel.Debug;
 
 		Logger.debugWrite("this is debug test.");

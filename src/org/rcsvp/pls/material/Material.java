@@ -1,5 +1,6 @@
-package org.rcsvp.pls;
+package org.rcsvp.pls.material;
 
+import org.rcsvp.pls.Logger;
 import org.rcsvp.pls.validation.IVerify;
 
 /**
@@ -10,11 +11,11 @@ import org.rcsvp.pls.validation.IVerify;
  */
 public class Material implements IMaterial {
 
-	public Material() {
+	public Material () {
 	}
 
 	@Override
-	public void addVerificationStack(IVerify verify) {
+	public void addVerificationStack ( IVerify verify ) {
 		Logger.debugWrite("call addVerificationStack");
 
 		//
@@ -23,7 +24,7 @@ public class Material implements IMaterial {
 	}
 
 	@Override
-	public void addAnotherMaterial(IMaterial subMaterial) {
+	public void addAnotherMaterial ( IMaterial subMaterial ) {
 	}
 
 }

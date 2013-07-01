@@ -9,8 +9,8 @@ package org.rcsvp.pls;
  */
 public interface IWrappable {
 
-	void updateName(String givenName);
+	void updateName ( String givenName );
 
-	void register(IWrappable childNode);
+	void register ( IWrappable childNode );
 
 }

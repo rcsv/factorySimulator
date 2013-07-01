@@ -8,22 +8,22 @@ public class Disposable implements IDisposable, IWrappable {
 	/**
 	 * ツールの使用限界を大体３段階で表現したものです。
 	 */
-	private DisposableStatus status;
+	private DisposableStatus	status;
 
 	/**
 	 * ツールの名称です。
 	 */
-	private String name;
+	private String				name;
 
 	/**
 	 * 使用できる限界の回数です。
 	 */
-	private int limit;
+	private int					limit;
 
 	/**
 	 * 現時点で何度使用したのかを覚えておきます。
 	 */
-	private int count;
+	private int					count;
 
 	/**
 	 * Disposable コンストラクタでは、ツールの名称と使用できる回数を設定して開始します。
@@ -33,7 +33,7 @@ public class Disposable implements IDisposable, IWrappable {
 	 * @param limit
 	 *            使用限界数
 	 */
-	public Disposable(String name, int limit) {
+	public Disposable ( String name, int limit ) {
 		this.name = name;
 		this.limit = limit;
 		this.status = DisposableStatus.Work;
@@ -41,7 +41,7 @@ public class Disposable implements IDisposable, IWrappable {
 	}
 
 	@Override
-	public void use() throws ToolWreckedException {
+	public void use () throws ToolWreckedException {
 		Logger.debugWrite(this.name + " start using.");
 
 		//
@@ -70,28 +70,28 @@ public class Disposable implements IDisposable, IWrappable {
 	}
 
 	@Override
-	public void repair() {
+	public void repair () {
 		this.count = 0;
 		this.status = DisposableStatus.Work;
 	}
 
 	@Override
-	public DisposableStatus getStatus() {
+	public DisposableStatus getStatus () {
 		return this.status;
 	}
 
 	@Override
-	public String toString() {
+	public String toString () {
 		return this.name;
 	}
 
 	@Override
-	public void updateName(String givenName) {
+	public void updateName ( String givenName ) {
 		this.name = givenName + ":" + this.name;
 	}
 
 	@Override
-	public void register(IWrappable childNode) {
+	public void register ( IWrappable childNode ) {
 		//
 	}
 }

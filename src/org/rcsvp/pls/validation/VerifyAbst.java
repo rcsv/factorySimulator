@@ -1,7 +1,7 @@
 package org.rcsvp.pls.validation;
 
-import org.rcsvp.pls.IMaterial;
 import org.rcsvp.pls.Logger;
+import org.rcsvp.pls.material.IMaterial;
 
 /**
  * 検証を行うオブジェクトは、かなりのレベルでやることは同じなので、 殆ど同じ場合はこの概要クラスを拡張すると実装しやすくなります。
@@ -14,30 +14,30 @@ public abstract class VerifyAbst implements IVerify {
 	/**
 	 * 実測値を持たせます。
 	 */
-	public volatile double actualMeasure = 0;
+	public volatile double	actualMeasure	= 0;
 
 	/**
 	 * 検証項目名を保持しておきます。
 	 */
-	private String name;
+	private String			name;
 
 	/**
 	 * 公差に関する情報を保持します。
 	 */
-	private ITolerance tolerance;
+	private ITolerance		tolerance;
 
 	/**
 	 * コンストラクタでは検証項目を入力する必要があります。
 	 * 
 	 * @param name
 	 */
-	public VerifyAbst(String name, ITolerance tolerance) {
+	public VerifyAbst ( String name, ITolerance tolerance ) {
 		this.name = name;
 		this.tolerance = tolerance;
 	}
 
 	@Override
-	public VerifyResult verify(IMaterial material) {
+	public VerifyResult verify ( IMaterial material ) {
 		Logger.debugWrite(this.name + "Start Verification.");
 
 		VerifyResult stat = verifyDetails(material);
@@ -59,10 +59,10 @@ public abstract class VerifyAbst implements IVerify {
 	 * @param material
 	 * @return
 	 */
-	protected abstract VerifyResult verifyDetails(IMaterial material);
+	protected abstract VerifyResult verifyDetails ( IMaterial material );
 
 	@Override
-	public ITolerance getTolerance() {
+	public ITolerance getTolerance () {
 		return this.tolerance;
 	}
 }
