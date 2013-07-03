@@ -1,6 +1,6 @@
 package org.rcsvp.pls.material;
 
-import org.rcsvp.pls.Logger;
+import org.rcsvp.pls.util.Logger;
 import org.rcsvp.pls.validation.IVerify;
 
 /**

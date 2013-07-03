@@ -4,7 +4,7 @@ package org.rcsvp.pls.disposable;
  * IDisposable インターフェイスで実装した消耗品が破損したことを伝える例外です。
  * この例外を受け取った場合、製造工程に何らかの不備が発生しています。
  * 
- * @author rcsv
+ * @author Rcsvp.org
  * 
  */
 public class ToolWreckedException extends Exception {

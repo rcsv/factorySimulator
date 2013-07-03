@@ -26,7 +26,7 @@ public interface ITolerance {
 	/**
 	 * 公差のタイプによって、内部に保有している情報の扱い方が異なる場合があるため、列挙型で定義しています。 それぞれ、寸法、幾何、電気抵抗の種類です。
 	 * 
-	 * @author rcsv
+	 * @author Rcsvp.org
 	 * 
 	 */
 	enum ToleranceType {

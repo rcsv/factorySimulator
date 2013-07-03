@@ -1,5 +1,7 @@
 package org.rcsvp.pls.material;
 
+import org.rcsvp.pls.factory.IControlCenter.IStatusEnum;
+
 /**
  * IShelf インターフェイスは、各工程で使用する材料を補完しておく棚を表現しています。
  * 材料は一つずつ使い、段々無くなっていきますが、各工程でのタクトタイムをとめないよう、 工場の従業員は注意して見張っておく必要があります。
@@ -45,7 +47,7 @@ public interface IShelf {
 	 * @author Rcsvpg.org
 	 * 
 	 */
-	enum ShelfStatus {
+	enum ShelfStatus implements IStatusEnum {
 
 		/**
 		 * 在庫が十分にある状態。問題なく製造工程が運用できています。

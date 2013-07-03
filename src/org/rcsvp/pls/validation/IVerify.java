@@ -1,5 +1,6 @@
 package org.rcsvp.pls.validation;
 
+import org.rcsvp.pls.factory.IControlCenter.IStatusEnum;
 import org.rcsvp.pls.material.IMaterial;
 
 /**
@@ -37,7 +38,7 @@ public interface IVerify {
 	 * @author rcsv
 	 * 
 	 */
-	enum VerifyResult {
+	enum VerifyResult implements IStatusEnum {
 		/**
 		 * 検証の結果、問題がなかったことを表現します。
 		 */

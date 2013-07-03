@@ -1,7 +1,7 @@
 package org.rcsvp.pls.validation;
 
-import org.rcsvp.pls.Logger;
 import org.rcsvp.pls.material.Material;
+import org.rcsvp.pls.util.Logger;
 import org.rcsvp.pls.validation.ITolerance.ToleranceType;
 
 public class ValidationTest {

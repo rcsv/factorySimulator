@@ -1,7 +1,7 @@
 package org.rcsvp.pls.validation;
 
-import org.rcsvp.pls.Logger;
 import org.rcsvp.pls.material.IMaterial;
+import org.rcsvp.pls.util.Logger;
 
 /**
  * 検証を行うオブジェクトは、かなりのレベルでやることは同じなので、 殆ど同じ場合はこの概要クラスを拡張すると実装しやすくなります。

@@ -1,7 +1,7 @@
 package org.rcsvp.pls.disposable;
 
 import org.rcsvp.pls.IWrappable;
-import org.rcsvp.pls.Logger;
+import org.rcsvp.pls.util.Logger;
 
 public class Disposable implements IDisposable, IWrappable {
 

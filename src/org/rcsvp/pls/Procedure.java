@@ -3,8 +3,13 @@ package org.rcsvp.pls;
 import java.util.*;
 
 import org.rcsvp.pls.disposable.IDisposable;
+import org.rcsvp.pls.factory.ControlCenterException;
+import org.rcsvp.pls.factory.IControlCenter;
+import org.rcsvp.pls.factory.IControlCenter.IStatusEnum;
+import org.rcsvp.pls.factory.IRegistrable;
 import org.rcsvp.pls.material.IMaterial;
 import org.rcsvp.pls.material.IShelf;
+import org.rcsvp.pls.util.Logger;
 import org.rcsvp.pls.validation.IVerify;
 
 /**
@@ -13,6 +18,10 @@ import org.rcsvp.pls.validation.IVerify;
  * @author Rcsvpg.org
  */
 public class Procedure implements IProcedure, IShelf {
+
+	private IControlCenter cc;
+
+	private volatile boolean powerOff = false;
 
 	/**
 	 * 一意の名前。
@@ -59,9 +68,10 @@ public class Procedure implements IProcedure, IShelf {
 	 */
 	public Procedure(String name) {
 
+		this.name = name;
+
 		shelves = new HashMap<String, IShelf>();
 		dispos = new HashMap<String, IDisposable>();
-
 		verify = new ArrayList<IVerify>();
 
 		//
@@ -77,21 +87,7 @@ public class Procedure implements IProcedure, IShelf {
 		//
 		// TODO: real to do list
 		//
-	}
 
-	@Override
-	public void register(IShelf shelf) {
-		shelves.put(shelf.toString(), shelf);
-	}
-
-	@Override
-	public void register(IDisposable dispo) {
-		dispos.put(dispo.toString(), dispo);
-	}
-
-	@Override
-	public void register(IVerify verify) {
-		this.verify.add(verify);
 	}
 
 	@Override
@@ -107,6 +103,42 @@ public class Procedure implements IProcedure, IShelf {
 	@Override
 	public ShelfStatus getStatus() {
 		return this.shelfstat;
+	}
+
+	@Override
+	public void setup(IControlCenter cc) {
+		this.cc = cc;
+	}
+
+	@Override
+	public void shutdown(IStatusEnum status) {
+		this.powerOff = false;
+	}
+
+	@Override
+	public void register(IRegistrable stuff) throws ControlCenterException {
+		if (this.cc == null) {
+			throw new ControlCenterException("当該システムは、" + "工場から順番に製造ライン、"
+					+ " 工程、その小ノード、" + "という順番で設定していきます。");
+		}
+		stuff.setup(cc);
+		
+		String x = stuff.getClass().getSimpleName() ;
+		
+		// from JDK 170...
+		switch ( x ) {
+		case "Shelf":
+			break;
+			
+		case "VerifySimpleImpl": // TODO これどうにかならないかな
+			break;
+			
+		case "Disposable":
+			break;
+			
+		default:
+			break;
+		}
 	}
 
 }

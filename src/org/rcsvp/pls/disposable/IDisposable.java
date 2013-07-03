@@ -1,5 +1,7 @@
 package org.rcsvp.pls.disposable;
 
+import org.rcsvp.pls.factory.IControlCenter.IStatusEnum;
+
 /**
  * IDisposable インターフェイスは、各工程で使用する道具、治具等を表現しています。
  * 特に磨耗、損耗、劣化、減衰の影響で本来の加工品質に耐えられなくなってくる道具が登録対象です。
@@ -47,7 +49,7 @@ public interface IDisposable {
 	 * @author Rcsvpg.org
 	 * 
 	 */
-	enum DisposableStatus {
+	enum DisposableStatus implements IStatusEnum {
 		/**
 		 * 通常使用に問題が無い状態。この状態を見た場合、関係者は誰も動きません。
 		 */

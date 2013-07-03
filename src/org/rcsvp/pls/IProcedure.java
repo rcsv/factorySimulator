@@ -1,6 +1,8 @@
 package org.rcsvp.pls;
 
 import org.rcsvp.pls.disposable.IDisposable;
+import org.rcsvp.pls.factory.ControlCenterException;
+import org.rcsvp.pls.factory.IRegistrable;
 import org.rcsvp.pls.material.IShelf;
 import org.rcsvp.pls.validation.IVerify;
 
@@ -9,41 +11,32 @@ import org.rcsvp.pls.validation.IVerify;
  * production lines. Each procedures take same time named "tact time". In this
  * case, they have to implement "Runnable".
  * 
- * IProcedure インターフェイスは、製造ラインに所属するそれぞれの工程を表現しています。
- * それぞれの工程は、タクトタイムという時間で協調して動作しますが、一連の作業は並列で行っていくため、マルチスレッドで動作させる必要があります。
- * 最前列の工程には少なくとも一つ、途中の工程にも一つ以上の在庫棚を持っていることが考えられます。
+ * IProcedure インターフェイスは、製造ラインに所属するそれぞれの工程を表現しています。それぞれの
+ * 工程は、タクトタイムという時間で協調して動作しますが、一連の作業は並列で行っていくため、マルチス
+ * レッドで動作させる必要があります。最前列の工程には少なくとも一つ、途中の工程にも一つ以上の在庫棚
+ * を持っていることが考えられます。
  * 
  * 各工程はその日のノルマがいくつなのか判断することはありません。
  * 
  * @author Rcsvpg.org
  * 
  */
-public interface IProcedure extends Runnable {
+public interface IProcedure extends IRegistrable, Runnable {
 
 	/**
-	 * 在庫棚を登録します。 在庫棚は各製造工程で全く無い場合もあれば、複数存在している場合もあります。
-	 * 在庫棚に在庫となる材料を補充するのは工場に勤務している従業員の仕事になります。
+	 * 在庫棚、各工程で使用している消耗品、及び工程の最後でのチェック項目を登録していきます。在庫
+	 * 棚に関しては各製造工程で保有していない場合があれば、逆に単一の工程にも関わらず在庫棚は複数
+	 * 存在する事があります。在庫棚に在庫となる材料を補充するのは工場に勤務している従業員の業務内
+	 * 容となります。
 	 * 
-	 * @param shelf
-	 *            使用する在庫棚
-	 */
-	void register(IShelf shelf);
-
-	/**
-	 * 各工程で使用する消耗品を登録します。消耗品も在庫棚同様、一つも消耗品がない場合もあれば、複数の消耗品で構成されている工程も存在します。
+	 * またインスタンスが Disposable 型だった場合は各工程で使用する消耗品を登録します。消耗品
+	 * も在庫棚同様、一つも消耗品が無い場合もあれば、複数の消耗品を使用した工程も存在します。
 	 * 
-	 * @param dispo
-	 *            IDisposable インターフェイスを実装したクラスのインスタンス。
-	 */
-	void register(IDisposable dispo);
-
-	/**
-	 * 各工程で加工が完了した後に検証する項目を登録します。
+	 * 最後に各工程で材料加工が完了したことを検証する項目を目指しています。
 	 * 
-	 * @param verify
-	 *            IVerify インターフェイスを実装したクラスのインスタンス。
+	 * @param staff IRegistrable インターフェイスを実装した小ノードクラスのインスタンス
 	 */
-	void register(IVerify verify);
+	void register ( IRegistrable stuff ) throws ControlCenterException ;
 
 	/**
 	 * ProcedureStatus は、各工程が持つであろう状態を表現しています。

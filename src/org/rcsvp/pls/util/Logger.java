@@ -1,4 +1,4 @@
-package org.rcsvp.pls;
+package org.rcsvp.pls.util;
 
 import java.util.Date;
 
