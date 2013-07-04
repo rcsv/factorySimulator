@@ -28,5 +28,7 @@ public enum GeneralStatus implements IStatusEnum {
 	
 	
 	InsufficientMaterials,
+	
+	WaitingPreviousMaterial,
 
 }
