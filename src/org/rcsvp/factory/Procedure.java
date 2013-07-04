@@ -8,12 +8,18 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 
 	private List<IShelf> shelves ;
 
+	private List<IDisposable> dispos ;
+
+	private List<IVerify> checklist ;
+
 	private Queue<IMaterial> output ;
 
 	public Procedure(String name) {
 		super(name, 0) ;
 
 		shelves = new ArrayList<IShelf>() ;
+		dispos = new ArrayList<IDisposable>() ;
+		checklist = new ArrayList<IVerify>() ;
 		output = new LinkedList<IMaterial>() ;
 
 	}
@@ -29,10 +35,10 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 			shelves.add((IShelf) target) ;
 			break ;
 		case "Disposable":
-			// dispos.add ( (IDisposable) target ) ;
+			dispos.add((IDisposable) target) ;
 			break ;
 		case "Verify":
-			// verify.add ( (IVerify) target ) ;
+			checklist.add((IVerify) target) ;
 			break ;
 		default:
 			break ;
@@ -61,11 +67,51 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 
 		//
 		// 1. get Material from Shelves and/or previous Procedure.
+		//
+		Iterator<IShelf> iS = shelves.iterator() ;
+		IMaterial original = null ;
+		IShelf temp = null ;
+		
+		while (iS.hasNext()) {
+			temp = iS.next() ;
+
+			if (original == null) {
+
+				original = temp.getMaterial() ;
+				if ( original == null ) {
+					// material insufficient.
+					//
+					this.status = GeneralStatus.WaitingPreviousMaterial;
+					cc.notify( new AlertBox( this ) ) ;
+					return ;
+				}
+
+			} else {
+
+				original.append(temp.getMaterial()) ;
+
+			}
+		}
+
+		//
 		// 2. Assembly, press etc. using tools (IDisposable)
+		//
+		Iterator<IDisposable> iD = dispos.iterator() ;
+		while (iD.hasNext()) {
+			original.fabricate(iD.next()) ;
+		}
+
+		//
 		// 3. Verify several check item.
+		//
+		Iterator<IVerify> iV = checklist.iterator() ;
+		while (iV.hasNext()) {
+			original.validate(iV.next()) ;
+		}
+
 		// 4. add output.
 		//
-		output.add(new Material("TODO")) ;
+		output.add( original ) ;
 
 	}
 
@@ -89,7 +135,10 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 
 	@Override
 	public IMaterial getMaterial() {
-		return this.output.remove() ;
+		if ( this.output.size() != 0 ) {
+			return this.output.remove() ;
+		}
+		return null ;
 	}
 
 	@Override

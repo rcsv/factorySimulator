@@ -1,11 +1,14 @@
 package org.rcsvp.factory ;
 
+import org.rcsvp.Logger ;
 import org.rcsvp.factory.common.IControlCenter ;
 import org.rcsvp.factory.common.IMaterial ;
 import org.rcsvp.factory.common.IShelf ;
 
 public class Shelf implements IShelf {
 
+	final private long tactTime = 1 ;
+	
 	private String name ;
 
 	private long count ;
@@ -46,11 +49,12 @@ public class Shelf implements IShelf {
 		while (!powerOff) {
 
 			try {
-				Thread.sleep(1 * cc.getTimeScale()) ;
+				Thread.sleep(tactTime * cc.getTimeScale()) ;
 			} catch (InterruptedException e) {
 				e.printStackTrace() ;
 			}
 
+			Logger.debugWrite ( this.name + " : material left : " + this.count ) ;
 		}
 		
 		this.status = GeneralStatus.NormallyShutdown;
