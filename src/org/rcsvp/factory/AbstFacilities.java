@@ -24,12 +24,16 @@ public abstract class AbstFacilities implements IRegistrable, IParent {
 	 * when condition of each objects are changed.
 	 */
 	protected IControlCenter cc ;
-	
+
 	/**
-	 * Stored object name for HashMap's key of parent node.
+	 * Stored object name for Map's key of parent node.
 	 */
 	protected String name ;
 
+	/**
+	 * Trigger of thread loop.
+	 * A thread will stop when it values true.
+	 */
 	protected volatile boolean powerOff = false ;
 
 	protected GeneralStatus status ;
