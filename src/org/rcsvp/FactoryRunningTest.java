@@ -1,15 +1,7 @@
 package org.rcsvp ;
 
 import org.rcsvp.factory.* ;
-import org.rcsvp.factory.impl.ControlCenter ;
-import org.rcsvp.factory.impl.Disposable ;
-import org.rcsvp.factory.impl.Factory ;
-import org.rcsvp.factory.impl.Labor ;
-import org.rcsvp.factory.impl.Procedure ;
-import org.rcsvp.factory.impl.ProductionLine ;
-import org.rcsvp.factory.impl.Shelf ;
-import org.rcsvp.factory.impl.Tolerance ;
-import org.rcsvp.factory.impl.Verify ;
+import org.rcsvp.factory.impl.* ;
 
 public class FactoryRunningTest {
 
@@ -67,8 +59,55 @@ public class FactoryRunningTest {
 
 		IVerify check1 = new Verify("Length Check", new Tolerance(
 				ITolerance.ToleranceType.Scantling, 10, 10)) ;
-
 		proc11.register(check1) ;
+
+		IProductionLine line2 = new ProductionLine("Line 2", 2, 8000) ;
+		factory.register(line2) ;
+
+		IProcedure proc21 = new Procedure("Proc21") ;
+		line2.register(proc21) ;
+		IProcedure proc22 = new Procedure("Proc22") ;
+		line2.register(proc22) ;
+		IProcedure proc23 = new Procedure("Proc23") ;
+		line2.register(proc23) ;
+
+		IShelf sh21 = new Shelf("Shelf for Proc21", 50) ;
+		proc21.register(sh21) ;
+
+		IDisposable d22 = new Disposable("any tool", 200) ;
+		IDisposable d23 = new Disposable("someting", 300) ;
+		proc22.register(d22) ;
+		proc23.register(d23) ;
+
+		IVerify check211 = new Verify("A", new Tolerance(
+				ITolerance.ToleranceType.Scantling, 10, 10)) ;
+		IVerify check212 = new Verify("B", new Tolerance(
+				ITolerance.ToleranceType.Scantling, 10, 10)) ;
+		IVerify check213 = new Verify("C", new Tolerance(
+				ITolerance.ToleranceType.Scantling, 10, 10)) ;
+		proc21.register(check211) ;
+		proc21.register(check212) ;
+		proc21.register(check213) ;
+
+		IVerify check221 = new Verify("D", new Tolerance(
+				ITolerance.ToleranceType.Scantling, 10, 10)) ;
+		IVerify check222 = new Verify("E", new Tolerance(
+				ITolerance.ToleranceType.Scantling, 10, 10)) ;
+		IVerify check223 = new Verify("F", new Tolerance(
+				ITolerance.ToleranceType.Scantling, 10, 10)) ;
+		proc22.register(check221) ;
+		proc22.register(check222) ;
+		proc22.register(check223) ;
+
+		IVerify check231 = new Verify("G", new Tolerance(
+				ITolerance.ToleranceType.Scantling, 10, 10)) ;
+		IVerify check232 = new Verify("H", new Tolerance(
+				ITolerance.ToleranceType.Scantling, 10, 10)) ;
+		IVerify check233 = new Verify("I", new Tolerance(
+				ITolerance.ToleranceType.Scantling, 10, 10)) ;
+		proc23.register(check231) ;
+		proc23.register(check232) ;
+		proc23.register(check233) ;
 
 		Thread x = new Thread(factory) ;
 		x.setName("Factory Thread") ;
