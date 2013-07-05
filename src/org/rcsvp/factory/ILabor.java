@@ -17,8 +17,10 @@ package org.rcsvp.factory ;
  * finally I implemented at {@link org.rcsvp.factory.impl.Labor} as a simple implementation.
  * 
  * @author Rcsvp.org
+ * @version $Date$ $Id$
  * @date Jul 6, 2013
  * @see {@link org.rcsvp.factory.impl.Labor}
+ * 
  * 
  */
 public interface ILabor extends IRegistrable {
