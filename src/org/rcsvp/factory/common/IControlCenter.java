@@ -1,26 +1,26 @@
-package org.rcsvp.factory.common;
+package org.rcsvp.factory.common ;
 
-import java.util.Map;
+import java.util.Map ;
 
-import org.rcsvp.factory.common.IRegistrable.*;
+import org.rcsvp.factory.common.IRegistrable.* ;
 
 public interface IControlCenter {
 
 	interface IAlertBox {
-		IRegistrable getTarget();
+		IRegistrable getTarget() ;
 
-		IStatusEnum getStatus();
+		IStatusEnum getStatus() ;
 	}
 
-	Map<String, IAlertBox> getConsole();
+	Map<String, IAlertBox> getConsole() ;
 
-	boolean powerOff();
+	boolean powerOff() ;
 
-	void setFactory(IFactory factory);
+	void setFactory(IFactory factory) ;
 
-	long getTimeScale();
+	long getTimeScale() ;
 
-	void setTimeScale(long timeScale);
+	void setTimeScale(long timeScale) ;
 
-	boolean notify(IAlertBox alertbox);
+	boolean notify(IAlertBox alertbox) ;
 }

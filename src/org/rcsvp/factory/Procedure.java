@@ -1,6 +1,7 @@
 package org.rcsvp.factory ;
 
 import java.util.* ;
+import java.util.concurrent.* ;
 
 import org.rcsvp.Logger ;
 import org.rcsvp.factory.common.* ;
@@ -15,13 +16,23 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 
 	private Queue<IMaterial> output ;
 
+	private Queue<IMaterial> wreckedParts ;
+
 	public Procedure(String name) {
 		super(name, 0) ;
 
 		shelves = new ArrayList<IShelf>() ;
+
 		dispos = new ArrayList<IDisposable>() ;
+
 		checklist = new ArrayList<IVerify>() ;
-		output = new LinkedList<IMaterial>() ;
+
+		/*
+		 * 
+		 */
+		output = new ConcurrentLinkedQueue<IMaterial>() ;
+
+		wreckedParts = new LinkedList<IMaterial>() ;
 
 	}
 
@@ -33,6 +44,7 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 
 		switch (targetName) {
 		case "Shelf":
+		case "Procedure":
 			shelves.add((IShelf) target) ;
 			break ;
 		case "Disposable":
@@ -50,12 +62,28 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 	@Override
 	protected void bootUp() {
 
+		Logger.infoWrite(this.name + " : has " + shelves.size() + " shelves.") ;
+		Logger.infoWrite(this.name + " : has " + dispos.size()
+				+ " disposable tools.") ;
+		Logger.infoWrite(this.name + " : has " + checklist.size()
+				+ " check list.") ;
+
 		ThreadGroup thShelves = new ThreadGroup(this.name + "Shelves") ;
 		Iterator<IShelf> iS = shelves.iterator() ;
+		IShelf temp = null ;
 		while (iS.hasNext()) {
-			new Thread(thShelves, iS.next()).start() ;
+			temp = iS.next() ;
+			if (temp instanceof IProcedure) {
+				Logger.debugWrite(this.name + " : assume " + temp.toString()
+						+ " as a material shelf. but thread start ignorance.") ;
+				continue ;
+			} else {
+				Logger.debugWrite(this.name + " : kick start "
+						+ temp.toString() + " as a material shelf.") ;
+			}
+			new Thread(thShelves, temp).start() ;
 		}
-
+		Logger.infoWrite(this.name + " : all shelves reload initialized.") ;
 	}
 
 	@Override
@@ -72,18 +100,18 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 		Iterator<IShelf> iS = shelves.iterator() ;
 		IMaterial original = null ;
 		IShelf temp = null ;
-		
+
 		while (iS.hasNext()) {
 			temp = iS.next() ;
 
 			if (original == null) {
 
 				original = temp.getMaterial() ;
-				if ( original == null ) {
+				if (original == null) {
 					// material insufficient.
 					//
-					this.status = GeneralStatus.WaitingPreviousMaterial;
-					cc.notify( new AlertBox( this ) ) ;
+					this.status = GeneralStatus.WaitingPreviousMaterial ;
+					cc.notify(new AlertBox(this)) ;
 					return ;
 				}
 
@@ -94,12 +122,24 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 			}
 		}
 
+		boolean success = false ;
 		//
 		// 2. Assembly, press etc. using tools (IDisposable)
 		//
 		Iterator<IDisposable> iD = dispos.iterator() ;
+
 		while (iD.hasNext()) {
-			original.fabricate(iD.next()) ;
+
+			success = original.fabricate(iD.next()) ;
+
+			if (!success) {
+
+				Logger.warnWrite(this.name + " : fabricate process failed. "
+						+ original.toString()) ;
+				this.wreckedParts.add(original) ;
+				return ;
+			}
+
 		}
 
 		//
@@ -112,7 +152,7 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 
 		// 4. add output.
 		//
-		output.add( original ) ;
+		output.add(original) ;
 
 	}
 
@@ -121,6 +161,11 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 		Iterator<IShelf> iS = shelves.iterator() ;
 		while (iS.hasNext()) {
 			iS.next().shutdown(GeneralStatus.NormallyShutdown) ;
+		}
+
+		Iterator<IDisposable> iD = dispos.iterator() ;
+		while (iD.hasNext()) {
+			iD.next().shutdown(GeneralStatus.NormallyShutdown) ;
 		}
 	}
 
@@ -136,17 +181,17 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 
 	@Override
 	public IMaterial getMaterial() {
-		if ( this.output.size() != 0 ) {
-			Logger.debugWrite( this.name + " take next procedure a material.");
+
+		if (this.output.size() != 0) {
 			return this.output.remove() ;
 		}
-		Logger.debugWrite( this.name + " cannot supply a material to next procedure.");
 		return null ;
+
 	}
 
 	@Override
-	public void reload() {
-		// Procedure Stuck cannot reload.
+	public boolean care() {
+		throw new RuntimeException() ;
 	}
 
 }

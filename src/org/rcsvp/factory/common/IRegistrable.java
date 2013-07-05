@@ -1,4 +1,4 @@
-package org.rcsvp.factory.common;
+package org.rcsvp.factory.common ;
 
 /**
  * IRegistrable interface represents set information into a IControlCenter
@@ -10,11 +10,11 @@ package org.rcsvp.factory.common;
  */
 public interface IRegistrable extends Runnable {
 
-	void setControlCenter(IControlCenter cc);
+	void setControlCenter(IControlCenter cc) ;
 
-	void shutdown(IStatusEnum status);
+	void shutdown(IStatusEnum status) ;
 
-	IStatusEnum getStatus();
+	IStatusEnum getStatus() ;
 
 	interface IStatusEnum {
 	}

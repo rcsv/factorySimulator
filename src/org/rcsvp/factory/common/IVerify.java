@@ -1,7 +1,9 @@
-package org.rcsvp.factory.common;
+package org.rcsvp.factory.common ;
 
-public interface IVerify {
+public interface IVerify extends IRegistrable {
 
 	boolean check(IMaterial material) ;
+
+	ITolerance getTolerance() ;
 
 }

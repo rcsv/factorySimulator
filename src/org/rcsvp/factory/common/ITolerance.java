@@ -1,5 +1,20 @@
-package org.rcsvp.factory.common;
+package org.rcsvp.factory.common ;
 
+/**
+ * ITolerance interface represents range of tolerance about each checkpoint.
+ * 
+ * @author Rcsvp.org
+ * 
+ */
 public interface ITolerance {
 
+	double getToleranceRange() ;
+
+	double getOffset() ;
+
+	enum ToleranceType {
+		Scantling, Geometric, Electrical
+	}
+
+	ToleranceType getType() ;
 }

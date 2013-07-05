@@ -1,9 +1,9 @@
-package org.rcsvp.factory;
+package org.rcsvp.factory ;
 
-import java.util.*;
+import java.util.* ;
 
-import org.rcsvp.Logger;
-import org.rcsvp.factory.common.*;
+import org.rcsvp.Logger ;
+import org.rcsvp.factory.common.* ;
 
 /**
  * Factory class is a simple implementation of IFactory interface.
@@ -13,35 +13,35 @@ import org.rcsvp.factory.common.*;
  */
 public class Factory extends AbstFacilities implements IFactory {
 
-	private Map<String, ILabor> labors;
-	private Map<String, IProductionLine> lines;
+	private Map<String, ILabor> labors ;
+	private Map<String, IProductionLine> lines ;
 
 	public Factory(String name, long tactTime) {
-		super(name, tactTime);
+		super(name, tactTime) ;
 
-		labors = new HashMap<String, ILabor>();
-		lines = new HashMap<String, IProductionLine>();
+		labors = new HashMap<String, ILabor>() ;
+		lines = new HashMap<String, IProductionLine>() ;
 
-		cc = ControlCenter.getInstance(name);
-		cc.setFactory(this);
+		cc = ControlCenter.getInstance(name) ;
+		cc.setFactory(this) ;
 	}
 
 	@Override
 	public boolean register(IRegistrable target) {
-		target.setControlCenter(cc);
+		target.setControlCenter(cc) ;
 
-		String targetName = target.getClass().getSimpleName();
+		String targetName = target.getClass().getSimpleName() ;
 
 		switch (targetName) {
 		case "Labor":
-			labors.put(target.toString(), (ILabor) target);
-			break;
+			labors.put(target.toString(), (ILabor) target) ;
+			break ;
 		case "ProductionLine":
-			lines.put(target.toString(), (IProductionLine) target);
+			lines.put(target.toString(), (IProductionLine) target) ;
 		default:
-			break;
+			break ;
 		}
-		return true;
+		return true ;
 	}
 
 	/*
@@ -50,46 +50,67 @@ public class Factory extends AbstFacilities implements IFactory {
 	@Override
 	protected void bootUp() {
 
+		Logger.infoWrite(this.name + " : start working today's job.") ;
+		Logger.infoWrite(this.name + " : has " + labors.size() + " labors.") ;
+		Logger.infoWrite(this.name + " : has " + lines.size()
+				+ " production lines.") ;
+		Logger.debugWrite(this.name + " : labor comming...") ;
+
 		// start labors
-		ThreadGroup thLabors = new ThreadGroup(this.name + "Labors");
-		Iterator<ILabor> iL = labors.values().iterator();
+
+		ThreadGroup thLabors = new ThreadGroup(this.name + "Labors") ;
+
+		Iterator<ILabor> iL = labors.values().iterator() ;
+
 		while (iL.hasNext()) {
-			new Thread(thLabors, iL.next()).start();
+
+			new Thread(thLabors, iL.next()).start() ;
+
 		}
 
+		Logger.infoWrite(this.name + " : call staff into working.") ;
+
 		// start production line
-		ThreadGroup thLines = new ThreadGroup(this.name + "Lines");
-		Iterator<IProductionLine> iP = lines.values().iterator();
+
+		ThreadGroup thLines = new ThreadGroup(this.name + "Lines") ;
+
+		Iterator<IProductionLine> iP = lines.values().iterator() ;
+
 		while (iP.hasNext()) {
-			new Thread(thLines, iP.next()).start();
+
+			new Thread(thLines, iP.next()).start() ;
+
 		}
+
+		Logger.infoWrite(this.name
+				+ " : Production lines power-on and all green.") ;
 
 	}
 
 	@Override
 	protected void routines() {
-		Logger.debugWrite(this.name + " : working...");
+		Logger.debugWrite(this.name + " : working...") ;
 	}
 
 	@Override
 	protected void finishProcess() {
-		Iterator<ILabor> iL = labors.values().iterator();
-		ILabor x = null;
+		Iterator<ILabor> iL = labors.values().iterator() ;
+		ILabor x = null ;
 		while (iL.hasNext()) {
-			x = iL.next();
-			x.shutdown(GeneralStatus.NormallyShutdown);
+			x = iL.next() ;
+			x.shutdown(GeneralStatus.NormallyShutdown) ;
 		}
-		Iterator<IProductionLine> iP = lines.values().iterator();
-		IProductionLine pl = null;
+		Iterator<IProductionLine> iP = lines.values().iterator() ;
+		IProductionLine pl = null ;
 		while (iP.hasNext()) {
-			pl = iP.next();
-			pl.shutdown(GeneralStatus.NormallyShutdown);
+			pl = iP.next() ;
+			pl.shutdown(GeneralStatus.NormallyShutdown) ;
 		}
 	}
 
 	@Override
 	protected boolean otherCheck() {
-		return true;
+		return true ;
 	}
 
 }

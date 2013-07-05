@@ -1,7 +1,9 @@
-package org.rcsvp.factory.common;
+package org.rcsvp.factory.common ;
 
-public interface IDisposable {
+public interface IDisposable extends IRegistrable, ICare {
 
-	boolean use(IMaterial material) ;
-	
+	float threshold = 0.125f ;
+
+	boolean use() ;
+
 }

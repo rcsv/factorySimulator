@@ -1,6 +1,6 @@
-package org.rcsvp.factory;
+package org.rcsvp.factory ;
 
-import org.rcsvp.factory.common.IRegistrable.IStatusEnum;
+import org.rcsvp.factory.common.IRegistrable.IStatusEnum ;
 
 public enum GeneralStatus implements IStatusEnum {
 
@@ -25,10 +25,11 @@ public enum GeneralStatus implements IStatusEnum {
 	 * facilities must be shutdown and labors should go home right now.
 	 */
 	NormallyShutdown,
-	
-	
+
 	InsufficientMaterials,
-	
+
 	WaitingPreviousMaterial,
+
+	VerifyFine,
 
 }

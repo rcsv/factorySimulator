@@ -8,10 +8,10 @@ import org.rcsvp.factory.common.IShelf ;
 public class Shelf implements IShelf {
 
 	final private long tactTime = 1 ;
-	
+
 	private String name ;
 
-	private long count ;
+	private volatile long count ;
 
 	private long stockSize ;
 
@@ -30,6 +30,7 @@ public class Shelf implements IShelf {
 	@Override
 	public void setControlCenter(IControlCenter cc) {
 		this.cc = cc ;
+		cc.notify(new AlertBox(this)) ;
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class Shelf implements IShelf {
 	@Override
 	public void run() {
 		this.status = GeneralStatus.Working ;
-		cc.notify(new AlertBox(this));
+		cc.notify(new AlertBox(this)) ;
 		while (!powerOff) {
 
 			try {
@@ -54,28 +55,47 @@ public class Shelf implements IShelf {
 				e.printStackTrace() ;
 			}
 
-			Logger.debugWrite ( this.name + " : material left : " + this.count ) ;
+			Logger.debugWrite(this.name + " : material left " + this.count) ;
 		}
-		
-		this.status = GeneralStatus.NormallyShutdown;
-		cc.notify(new AlertBox(this));
+
+		this.status = GeneralStatus.NormallyShutdown ;
+		cc.notify(new AlertBox(this)) ;
 	}
 
 	@Override
 	public IMaterial getMaterial() {
-		count-- ;
+
 		if (this.count <= threshold * stockSize) {
+
+			this.status = GeneralStatus.InsufficientMaterials ;
+			cc.notify(new AlertBox(this)) ;
+
 			if (count <= 0) {
-				this.status = GeneralStatus.InsufficientMaterials ;
-				cc.notify(new AlertBox(this)) ;
+				return null ;
 			}
 		}
+
+		count-- ;
 		return new Material("from : " + this.name) ;
 	}
 
 	@Override
-	public void reload() { this.count += this.stockSize ; }
+	public boolean care() {
+
+		Logger.debugWrite(this.name + " : call reload(). current bullets is "
+				+ this.count) ;
+
+		this.count += this.stockSize ;
+		this.status = GeneralStatus.Working ;
+
+		Logger.debugWrite(this.name
+				+ " : reload finsihed. after bullets remains " + this.count) ;
+
+		return true ;
+	}
 
 	@Override
-	public String toString () { return this.name ; }
+	public String toString() {
+		return this.name ;
+	}
 }

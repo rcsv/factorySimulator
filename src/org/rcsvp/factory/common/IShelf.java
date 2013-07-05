@@ -1,10 +1,10 @@
-package org.rcsvp.factory.common;
+package org.rcsvp.factory.common ;
 
-public interface IShelf extends IRegistrable {
+public interface IShelf extends IRegistrable, ICare {
 
 	IMaterial getMaterial() ;
 
-	void reload() ;
-	
+	// void reload() ;
+
 	float threshold = 0.125f ;
 }

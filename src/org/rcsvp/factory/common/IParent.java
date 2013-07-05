@@ -1,4 +1,4 @@
-package org.rcsvp.factory.common;
+package org.rcsvp.factory.common ;
 
 /**
  * IParent interface represent parent node. target instance must implemented
@@ -9,5 +9,5 @@ package org.rcsvp.factory.common;
  */
 public interface IParent {
 
-	boolean register(IRegistrable target);
+	boolean register(IRegistrable target) ;
 }

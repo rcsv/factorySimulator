@@ -1,4 +1,4 @@
-package org.rcsvp.factory.common;
+package org.rcsvp.factory.common ;
 
 /**
  * 
@@ -7,7 +7,7 @@ package org.rcsvp.factory.common;
  */
 public interface IProcedure extends IRegistrable, IParent {
 
-	void setTactTime(long tactTime);
+	void setTactTime(long tactTime) ;
 
-	int getOutputCount();
+	int getOutputCount() ;
 }

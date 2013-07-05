@@ -12,11 +12,10 @@ public class Material implements IMaterial {
 	private String name ;
 
 	private Stack<IMaterial> bom ;
-	
+
 	private Queue<IDisposable> fabricHistory ;
-	
+
 	private Queue<IVerify> verifyHistory ;
-	
 
 	public Material(String name) {
 		this.name = name ;
@@ -32,22 +31,23 @@ public class Material implements IMaterial {
 
 	@Override
 	public void append(IMaterial other) {
-		Logger.debugWrite( this.name + " : append other material" + other.toString());
+		Logger.debugWrite(this.name + " : append other material"
+				+ other.toString()) ;
 		this.bom.push(other) ;
 	}
 
 	@Override
 	public boolean fabricate(IDisposable tools) {
-		Logger.debugWrite( this.name + " : fabricated by " + tools.toString());
-		this.fabricHistory.add(tools);
-		return tools.use(this) ;
-		
+		Logger.debugWrite(this.name + " : fabricated by " + tools.toString()) ;
+		this.fabricHistory.add(tools) ;
+		return tools.use() ;
+
 	}
-	
+
 	@Override
-	public boolean validate( IVerify verification ) {
-		Logger.debugWrite( this.name + " : verify about " + verification);
-		this.verifyHistory.add(verification);
+	public boolean validate(IVerify verification) {
+		Logger.debugWrite(this.name + " : verify about " + verification) ;
+		this.verifyHistory.add(verification) ;
 		return verification.check(this) ;
 	}
 }
