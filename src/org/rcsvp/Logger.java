@@ -5,8 +5,18 @@ import java.text.SimpleDateFormat ;
 import java.util.Date ;
 
 /**
- * おもいきり潔い車輪の再開発として Logger を作ります。デバッグレベルから、エラーレベルまで 6
- * 種類のレベルに応じて吐き出します。低いレベルの情報を抑制する場合は lv を操作します。
+ * Re-develop java.util.logging.Logger (via only Console). It provides 6
+ * severity level in this implementation. I see, I didn't know the existence of
+ * java.util.logging.*. I just hate call a method getGlobal().
+ * 
+ * <h2>How to use this logger</h2> Call six static method like:
+ * <code>Logger.debugWrite( "something" ) ;</code> when use these methods. To
+ * filtering logging by using LogLevel, set {@link #lv} directory.
+ * 
+ * おもいきり潔く、Logger という車輪の再開発を行っています。デバッグレベルから、エラーレベルまで 6
+ * 種類のレベルに応じて吐き出します。低いレベルの情報を抑制する場合は lv を操作します。java.util.logging.
+ * を知らない訳ではないんです。ただひたすら getGlobal() とか、Properties とか、DateFormat
+ * のために設定ファイルとかは遠慮したいのです。
  * 
  * @author Rcsvp.org
  * 
@@ -19,7 +29,7 @@ public class Logger {
 	 * @author Tomohiro AWANE <Awane.Tomohiro@me.com>
 	 * 
 	 */
-	public enum VerboseLevel {
+	public enum LogLevel {
 
 		/**
 		 * Debug レベルではありませんが、シミュレーターに復旧できない不具合が生じた時、異常終了と同時に表示させるべきレベルのものです。
@@ -67,30 +77,30 @@ public class Logger {
 	/**
 	 * べらべら度合いを変更するスイッチ。デフォルトはご注意レベルを表示します。。
 	 */
-	public static VerboseLevel lv = VerboseLevel.Notice ;
+	public static LogLevel lv = LogLevel.Notice ;
 
 	public static void abendWrite(String msg) {
-		write("[ABEND] " + msg, VerboseLevel.Abend) ;
+		write("[ABEND] " + msg, LogLevel.Abend) ;
 	}
 
 	public static void debugWrite(String msg) {
-		write("[DEBUG] " + msg, VerboseLevel.Debug) ;
+		write("[DEBUG] " + msg, LogLevel.Debug) ;
 	}
 
 	public static void errorWrite(String msg) {
-		write("[ERROR] " + msg, VerboseLevel.Error) ;
+		write("[ERROR] " + msg, LogLevel.Error) ;
 	}
 
 	public static void infoWrite(String msg) {
-		write("[FINE ] " + msg, VerboseLevel.Info) ;
+		write("[FINE ] " + msg, LogLevel.Info) ;
 	}
 
 	public static void noticeWrite(String msg) {
-		write("[NOTE ] " + msg, VerboseLevel.Notice) ;
+		write("[NOTE ] " + msg, LogLevel.Notice) ;
 	}
 
 	public static void warnWrite(String msg) {
-		write("[WARN ] " + msg, VerboseLevel.Warn) ;
+		write("[WARN ] " + msg, LogLevel.Warn) ;
 	}
 
 	/**
@@ -98,7 +108,7 @@ public class Logger {
 	 * 
 	 * @param msg
 	 */
-	private static void write(String msg, VerboseLevel x) {
+	private static void write(String msg, LogLevel x) {
 		if (lv.ordinal() <= x.ordinal()) {
 			DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss") ;
 			System.out.println("[" + df.format(new Date()) + "] " + msg) ;

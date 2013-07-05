@@ -6,7 +6,7 @@ import org.rcsvp.factory.impl.* ;
 public class FactoryRunningTest {
 
 	public static void main(String[] args) {
-		Logger.lv = Logger.VerboseLevel.Info ;
+		Logger.lv = Logger.LogLevel.Info ;
 
 		Logger.debugWrite(" - - - START  - - - ") ;
 
