@@ -2,6 +2,7 @@ package org.rcsvp.factory ;
 
 import java.util.* ;
 
+import org.rcsvp.Logger ;
 import org.rcsvp.factory.common.* ;
 
 public class Procedure extends AbstFacilities implements IProcedure, IShelf {
@@ -136,8 +137,10 @@ public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 	@Override
 	public IMaterial getMaterial() {
 		if ( this.output.size() != 0 ) {
+			Logger.debugWrite( this.name + " take next procedure a material.");
 			return this.output.remove() ;
 		}
+		Logger.debugWrite( this.name + " cannot supply a material to next procedure.");
 		return null ;
 	}
 
