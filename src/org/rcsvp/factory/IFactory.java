@@ -6,8 +6,11 @@ package org.rcsvp.factory ;
  * has some factories and factories have some production lines.
  * 
  * In this case, Factory equipped next-generation infrastructure, named
- * ControlCenter. A control center can check all facilities by console.
+ * ControlCenter. A control center can check all facilities by console. I
+ * prepared simple implementation of this interface at
+ * {@link org.rcsvp.factory.impl.Factory}.
  * 
+ * @see org.rcsvp.factory.impl.Factory
  * @author Rcsvp.org
  * 
  */
