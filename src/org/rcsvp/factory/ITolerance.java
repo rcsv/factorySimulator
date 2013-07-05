@@ -1,4 +1,4 @@
-package org.rcsvp.factory.common ;
+package org.rcsvp.factory ;
 
 /**
  * ITolerance interface represents range of tolerance about each checkpoint.

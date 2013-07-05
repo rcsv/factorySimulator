@@ -1,9 +1,9 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
 import java.util.* ;
 
-import org.rcsvp.factory.common.IControlCenter ;
-import org.rcsvp.factory.common.IFactory ;
+import org.rcsvp.factory.IControlCenter ;
+import org.rcsvp.factory.IFactory ;
 
 /**
  * ControlCenter class represents a control center room and/or Technical console

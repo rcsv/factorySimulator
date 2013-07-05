@@ -1,11 +1,11 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
 import java.util.* ;
 
 import org.rcsvp.Logger ;
-import org.rcsvp.factory.common.IDisposable ;
-import org.rcsvp.factory.common.IMaterial ;
-import org.rcsvp.factory.common.IVerify ;
+import org.rcsvp.factory.IDisposable ;
+import org.rcsvp.factory.IMaterial ;
+import org.rcsvp.factory.IVerify ;
 
 public class Material implements IMaterial {
 

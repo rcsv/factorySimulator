@@ -1,4 +1,4 @@
-package org.rcsvp.factory.common ;
+package org.rcsvp.factory ;
 
 /**
  * IParent interface represent parent node. target instance must implemented

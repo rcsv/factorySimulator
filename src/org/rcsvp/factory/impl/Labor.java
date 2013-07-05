@@ -1,15 +1,15 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
 import java.util.* ;
 import java.util.Map.Entry ;
 
-import org.rcsvp.factory.common.ICare ;
-import org.rcsvp.factory.common.IControlCenter.IAlertBox ;
-import org.rcsvp.factory.common.IDisposable ;
-import org.rcsvp.factory.common.IFactory ;
-import org.rcsvp.factory.common.ILabor ;
-import org.rcsvp.factory.common.IRegistrable ;
-import org.rcsvp.factory.common.IShelf ;
+import org.rcsvp.factory.ICare ;
+import org.rcsvp.factory.IDisposable ;
+import org.rcsvp.factory.IFactory ;
+import org.rcsvp.factory.ILabor ;
+import org.rcsvp.factory.IRegistrable ;
+import org.rcsvp.factory.IShelf ;
+import org.rcsvp.factory.IControlCenter.IAlertBox ;
 import org.rcsvp.Logger ;
 
 public class Labor extends AbstFacilities implements ILabor {

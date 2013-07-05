@@ -1,4 +1,4 @@
-package org.rcsvp.factory.common ;
+package org.rcsvp.factory ;
 
 public interface IShelf extends IRegistrable, ICare {
 

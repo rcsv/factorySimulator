@@ -1,10 +1,15 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
 import java.util.* ;
 import java.util.concurrent.* ;
 
 import org.rcsvp.Logger ;
-import org.rcsvp.factory.common.* ;
+import org.rcsvp.factory.IDisposable ;
+import org.rcsvp.factory.IMaterial ;
+import org.rcsvp.factory.IProcedure ;
+import org.rcsvp.factory.IRegistrable ;
+import org.rcsvp.factory.IShelf ;
+import org.rcsvp.factory.IVerify ;
 
 public class Procedure extends AbstFacilities implements IProcedure, IShelf {
 

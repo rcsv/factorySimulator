@@ -1,9 +1,12 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
 import java.util.* ;
 
 import org.rcsvp.Logger ;
-import org.rcsvp.factory.common.* ;
+import org.rcsvp.factory.IFactory ;
+import org.rcsvp.factory.ILabor ;
+import org.rcsvp.factory.IProductionLine ;
+import org.rcsvp.factory.IRegistrable ;
 
 /**
  * Factory class is a simple implementation of IFactory interface.

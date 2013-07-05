@@ -1,4 +1,4 @@
-package org.rcsvp.factory.common ;
+package org.rcsvp.factory ;
 
 /**
  * Interface IFactory represents Manufacturing factory. it products lots of

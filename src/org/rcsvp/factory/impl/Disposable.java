@@ -1,7 +1,7 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
-import org.rcsvp.factory.common.IControlCenter ;
-import org.rcsvp.factory.common.IDisposable ;
+import org.rcsvp.factory.IControlCenter ;
+import org.rcsvp.factory.IDisposable ;
 
 public class Disposable implements IDisposable {
 

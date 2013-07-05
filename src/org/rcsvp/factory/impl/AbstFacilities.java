@@ -1,7 +1,9 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
 import org.rcsvp.Logger ;
-import org.rcsvp.factory.common.* ;
+import org.rcsvp.factory.IControlCenter ;
+import org.rcsvp.factory.IParent ;
+import org.rcsvp.factory.IRegistrable ;
 
 /**
  * AbstFacility class represent a workflow of this simulation object. there are
@@ -20,7 +22,7 @@ public abstract class AbstFacilities implements IRegistrable, IParent {
 
 	/**
 	 * A instance of IControlCenter it must be call method
-	 * {@link IControlCenter#notify(org.rcsvp.factory.common.IControlCenter.IAlertBox)}
+	 * {@link IControlCenter#notify(org.rcsvp.factory.IControlCenter.IAlertBox)}
 	 * when condition of each objects are changed.
 	 */
 	protected IControlCenter cc ;

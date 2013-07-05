@@ -1,9 +1,9 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
 import org.rcsvp.Logger ;
-import org.rcsvp.factory.common.IControlCenter ;
-import org.rcsvp.factory.common.IMaterial ;
-import org.rcsvp.factory.common.IShelf ;
+import org.rcsvp.factory.IControlCenter ;
+import org.rcsvp.factory.IMaterial ;
+import org.rcsvp.factory.IShelf ;
 
 public class Shelf implements IShelf {
 

@@ -1,8 +1,8 @@
-package org.rcsvp.factory.common ;
+package org.rcsvp.factory ;
 
 import java.util.Map ;
 
-import org.rcsvp.factory.common.IRegistrable.* ;
+import org.rcsvp.factory.IRegistrable.* ;
 
 public interface IControlCenter {
 

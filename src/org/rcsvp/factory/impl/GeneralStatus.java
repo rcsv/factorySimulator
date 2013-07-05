@@ -1,6 +1,6 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
-import org.rcsvp.factory.common.IRegistrable.IStatusEnum ;
+import org.rcsvp.factory.IRegistrable.IStatusEnum ;
 
 public enum GeneralStatus implements IStatusEnum {
 

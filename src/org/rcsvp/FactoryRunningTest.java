@@ -1,7 +1,15 @@
 package org.rcsvp ;
 
 import org.rcsvp.factory.* ;
-import org.rcsvp.factory.common.* ;
+import org.rcsvp.factory.impl.ControlCenter ;
+import org.rcsvp.factory.impl.Disposable ;
+import org.rcsvp.factory.impl.Factory ;
+import org.rcsvp.factory.impl.Labor ;
+import org.rcsvp.factory.impl.Procedure ;
+import org.rcsvp.factory.impl.ProductionLine ;
+import org.rcsvp.factory.impl.Shelf ;
+import org.rcsvp.factory.impl.Tolerance ;
+import org.rcsvp.factory.impl.Verify ;
 
 public class FactoryRunningTest {
 

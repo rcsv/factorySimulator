@@ -1,6 +1,6 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
-import org.rcsvp.factory.common.ITolerance ;
+import org.rcsvp.factory.ITolerance ;
 
 public class Tolerance implements ITolerance {
 

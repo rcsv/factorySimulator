@@ -1,9 +1,11 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
 import java.util.* ;
 
 import org.rcsvp.Logger ;
-import org.rcsvp.factory.common.* ;
+import org.rcsvp.factory.IProcedure ;
+import org.rcsvp.factory.IProductionLine ;
+import org.rcsvp.factory.IRegistrable ;
 
 public class ProductionLine extends AbstFacilities implements IProductionLine {
 

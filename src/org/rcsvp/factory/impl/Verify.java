@@ -1,11 +1,11 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.impl ;
 
 import java.util.Random ;
 
-import org.rcsvp.factory.common.IControlCenter ;
-import org.rcsvp.factory.common.IMaterial ;
-import org.rcsvp.factory.common.ITolerance ;
-import org.rcsvp.factory.common.IVerify ;
+import org.rcsvp.factory.IControlCenter ;
+import org.rcsvp.factory.IMaterial ;
+import org.rcsvp.factory.ITolerance ;
+import org.rcsvp.factory.IVerify ;
 
 public class Verify implements IVerify {
 
