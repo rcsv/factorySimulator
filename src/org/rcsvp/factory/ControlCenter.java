@@ -1,11 +1,16 @@
-package org.rcsvp.factory;
+package org.rcsvp.factory ;
 
-import java.util.*;
+import java.util.* ;
 
-import org.rcsvp.factory.common.IControlCenter;
-import org.rcsvp.factory.common.IFactory;
+import org.rcsvp.factory.common.IControlCenter ;
+import org.rcsvp.factory.common.IFactory ;
 
 /**
+ * ControlCenter class represents a control center room and/or Technical console
+ * display of a factory. It implemented multi-singleton, it provide only one
+ * instance each factory objects. So {@link #getInstance(String)} method
+ * requires a factory code name generated unique.
+ * 
  * Singleton 複合で、Factory の中で一つ。getInstance には、FactoryCode となる String
  * 型の文字列が必要となる。
  * 
@@ -14,18 +19,18 @@ import org.rcsvp.factory.common.IFactory;
  */
 public class ControlCenter implements IControlCenter {
 
-	private IFactory factory;
+	private IFactory factory ;
 
-	private static Map<String, IControlCenter> mapCC = new HashMap<String, IControlCenter>();
+	private static Map<String, IControlCenter> mapCC = new HashMap<String, IControlCenter>() ;
 
-	private Map<String, IAlertBox> console;
+	private Map<String, IAlertBox> console ;
 
 	/**
 	 * シングルトンで実装するためコンストラクタを private にして封印。
 	 */
 	private ControlCenter() {
-		console = new HashMap<String, IAlertBox>();
-		this.timeScale = 1000;
+		console = new HashMap<String, IAlertBox>() ;
+		this.timeScale = 1000 ;
 	}
 
 	/**
@@ -35,48 +40,51 @@ public class ControlCenter implements IControlCenter {
 	 */
 	public static IControlCenter getInstance(String factoryCode) {
 
-		IControlCenter x = mapCC.get(factoryCode);
+		IControlCenter x = mapCC.get(factoryCode) ;
 
 		if (x == null) {
-			x = new ControlCenter();
-			mapCC.put(factoryCode, x);
+			x = new ControlCenter() ;
+			mapCC.put(factoryCode, x) ;
 		}
 
-		return x;
+		return x ;
 	}
 
 	@Override
 	public boolean notify(IAlertBox box) {
-		console.put(box.getTarget().toString(), box);
-		return true;
+		console.put(box.getTarget().toString(), box) ;
+		return true ;
 	}
 
 	@Override
 	public Map<String, IAlertBox> getConsole() {
-		return this.console;
+		return this.console ;
 	}
 
 	@Override
 	public long getTimeScale() {
-		return timeScale;
+		return timeScale ;
 	}
 
-	private long timeScale = 1000;
+	private long timeScale ;
 
 	@Override
 	public boolean powerOff() {
-		this.factory.shutdown(GeneralStatus.NormallyShutdown);
-		return false;
+		this.factory.shutdown(GeneralStatus.NormallyShutdown) ;
+		return false ;
 	}
 
 	@Override
 	public void setFactory(IFactory factory) {
-		this.factory = factory;
+		this.factory = factory ;
 	}
 
 	@Override
 	public void setTimeScale(long timeScale) {
-		this.timeScale = timeScale;
+		if (timeScale <= 0) {
+			return ;
+		}
+		this.timeScale = timeScale ;
 	}
 
 }
