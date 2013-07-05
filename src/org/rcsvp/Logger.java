@@ -1,6 +1,8 @@
-package org.rcsvp;
+package org.rcsvp ;
 
-import java.util.Date;
+import java.text.DateFormat ;
+import java.text.SimpleDateFormat ;
+import java.util.Date ;
 
 /**
  * おもいきり潔い車輪の再開発として Logger を作ります。デバッグレベルから、エラーレベルまで 6
@@ -65,30 +67,30 @@ public class Logger {
 	/**
 	 * べらべら度合いを変更するスイッチ。デフォルトはご注意レベルを表示します。。
 	 */
-	public static VerboseLevel lv = VerboseLevel.Notice;
+	public static VerboseLevel lv = VerboseLevel.Notice ;
 
 	public static void abendWrite(String msg) {
-		write(msg, VerboseLevel.Abend);
+		write("[ABEND] " + msg, VerboseLevel.Abend) ;
 	}
 
 	public static void debugWrite(String msg) {
-		write(msg, VerboseLevel.Debug);
+		write("[DEBUG] " + msg, VerboseLevel.Debug) ;
 	}
 
 	public static void errorWrite(String msg) {
-		write(msg, VerboseLevel.Error);
+		write("[ERROR] " + msg, VerboseLevel.Error) ;
 	}
 
 	public static void infoWrite(String msg) {
-		write(msg, VerboseLevel.Info);
+		write("[FINE ] " + msg, VerboseLevel.Info) ;
 	}
 
 	public static void noticeWrite(String msg) {
-		write(msg, VerboseLevel.Notice);
+		write("[NOTE ] " + msg, VerboseLevel.Notice) ;
 	}
 
 	public static void warnWrite(String msg) {
-		write(msg, VerboseLevel.Warn);
+		write("[WARN ] " + msg, VerboseLevel.Warn) ;
 	}
 
 	/**
@@ -98,7 +100,8 @@ public class Logger {
 	 */
 	private static void write(String msg, VerboseLevel x) {
 		if (lv.ordinal() <= x.ordinal()) {
-			System.out.println("[" + new Date() + "] " + msg);
+			DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss") ;
+			System.out.println("[" + df.format(new Date()) + "] " + msg) ;
 		}
 	}
 
