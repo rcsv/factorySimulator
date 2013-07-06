@@ -27,6 +27,8 @@ Production Line Simulator 改め「工場シミュレータ」は、仮想的に
 
 > new Thread ( factory ).start() ;
 
+使用例については、org.rcsvp.FactoryRunningTest.java を参照してください。
+
 ## 今後のアクション
 [2013-07-06] シミュレータが開始するまでの工場構築までに中々時間がかかるため、設定ファイル方式構築をしやすくする予定。
 
