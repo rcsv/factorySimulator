@@ -9,7 +9,7 @@ import org.rcsvp.factory.IRegistrable.* ;
  * all status in a factory's situation. Worker instance that implemented ILabor
  * interface check and action triggered by it.
  * 
- *  {$Id$}
+ * {$Id$}
  * 
  * @see ILabor
  * @author Rcsvp.org
