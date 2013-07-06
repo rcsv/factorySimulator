@@ -4,6 +4,8 @@ Production Line Simulator 改め「工場シミュレータ」は、仮想的に
 ## System configuration
 呼び出すクラスから <code>import org.rcsvp.factory.* ;</code> を宣言し、下記の構成で工場を構築してください。
 
+**NOTE**: ノードの上からインスタンスを構築していってください。ボトムアップで構築すると集中管理コンソールに相当するインスタンスの共有に失敗します。現段階では RuntimeException() を送信し、Factory Simulator は停止します。
+
 > ###  Factory
 > 工場を表現しています。register メソッドを使って「生産ライン」と「従業員」の２種類が登録できます。
 >> ### Labor
