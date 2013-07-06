@@ -1,4 +1,4 @@
-# factory Simulator
+# Factory simulator
 Production Line Simulator 改め「工場シミュレータ」は、仮想的に工場を表現し、どのような動きをするのかを見て愛でる目的のアプリケーションです。Java 1.7 以降で動作します。考えられる用途として、愛でる他に工場に IT システムを導入するに当って、工場とはどういうところなのかの理解を助けるため、程度のものだと考えてください。シミュレータはあくまでシミュレータでそれ以上でもそれ以下でもありません。ゲームでもなければユーティリティでも無い、ちょっと珍しいタイプのプログラムです。
  
 ## System configuration
@@ -35,3 +35,6 @@ Production Line Simulator 改め「工場シミュレータ」は、仮想的に
 ## Changelog
 - v1.0: [2013-07-05] Initial release
 - v0.0: [2013-06-01] Start designing
+
+*Author*: recessive programmer @rcsv_pg
+
