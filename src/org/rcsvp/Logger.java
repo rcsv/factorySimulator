@@ -13,69 +13,94 @@ import java.util.Date ;
  * <code>Logger.debugWrite( "something" ) ;</code> when use these methods. To
  * filtering logging by using LogLevel, set {@link #lv} directory.
  * 
- * おもいきり潔く、Logger という車輪の再開発を行っています。デバッグレベルから、エラーレベルまで 6
- * 種類のレベルに応じて吐き出します。低いレベルの情報を抑制する場合は lv を操作します。java.util.logging.
- * を知らない訳ではないんです。ただひたすら getGlobal() とか、Properties とか、DateFormat
- * のために設定ファイルとかは遠慮したいのです。
- * 
  * @author Rcsvp.org
  * 
  */
 public class Logger {
 
 	/**
-	 * Logger クラスで使用するレベル。
-	 * 
-	 * @author Tomohiro AWANE <Awane.Tomohiro@me.com>
-	 * 
+	 * LogLevel have 2 role. one case, a level of error priority
 	 */
 	public enum LogLevel {
 
 		/**
-		 * Debug レベルではありませんが、シミュレーターに復旧できない不具合が生じた時、異常終了と同時に表示させるべきレベルのものです。
-		 */
-		Abend,
-
-		/**
-		 * Debug レベルでは設計を構想している最中にしか興味がわかないレベルの情報を提供します。
-		 * およそどうでもいい情報はさっさと切ってしまいましょう。どうしても興味がわく場合は、 Logger.lv =
-		 * Logger.VerboseLevel.Debug とかにします。
+		 * <h2>Level. 1</h2> Debug.
+		 * <p>
+		 * Static debugging / messaging class for factorySimulator. This Number
+		 * defines a set of static methods that can be called to produce
+		 * debugging messages. Messages have an associated "debug level" and
+		 * messages below the current setting are not displayed.
+		 * </p>
 		 */
 		Debug,
 
 		/**
-		 * Debug レベルではありませんが、シミュレーターの不具合で、意図しない振る舞いが発生した場合に表示します。
-		 */
-		Error,
-
-		/**
-		 * Info レベルは、特にこれを見てどのスレッドを状況判断、意思決定の類を変更しないレベルの
-		 * 情報を表示する場合に使用します。通常の場合は表示されません。これもデバッグレベルとまで
-		 * はいかないものの、かなりどうでもいいレベルの情報が流れてきますのであしからず。
+		 * <h2>Level. 2</h2> Information.
+		 * <p>
+		 * Static information / messaging class for Factory Simulator. This
+		 * level defies a set of static methods that can be called to produce
+		 * information level messages. Message have an associated
+		 * "information level" and messages below the current setting are not
+		 * displayed.
+		 * </p>
 		 */
 		Info,
 
 		/**
-		 * 何が何でも、ログは表示しません。
-		 */
-		None,
-
-		/**
-		 * Notice レベルになると、この情報を見た何らかの人、機械、その他のインスタンスが判断し、 行動を変更します。
-		 * この情報を直接見て動くような仕組みにするつもりはないので、あくまでシミュレーターを眺めている人用の情報提供です。
+		 * <h2>Level. 3</h2> Notice, Notification.
+		 * <p>
+		 * Static notification / messaging class for Factory simulator. This
+		 * number level defines a set of static methods that can be called to
+		 * produce notification level messages. Message have an associated
+		 * "notify level" and messages below the current setting are not
+		 * displayed.
+		 * </p>
+		 * </p>
 		 */
 		Notice,
 
 		/**
-		 * Warn レベルは、意思決定どころか、シミュレーター内で働く人たちが困った状況に陥っている
-		 * 場合に使用されます。この表示を見たスレッドは何らかの行動を変更する必要があります。また
-		 * シミュレーター内のあらゆるインスタンスはこれが発生したら「慌てる」様に振る舞う必要がありそうです。
+		 * <h2>Level. 4</h2> Warn.
+		 * <p>
+		 * Static warn / messaging instance for Factory Simulator. This number
+		 * level defines a set of static methods that can be called to produce
+		 * warning level messages. Message have an associated "warn level" and
+		 * messages below the current setting are not displayed.
+		 * </p>
 		 */
-		Warn
+		Warn,
+
+		/**
+		 * <h2>Level. 5</h2> Error.
+		 * <p>
+		 * Static Error / messaging instance for Factory Simulator. This number
+		 * level defines a set of static methods that can be called to procedure
+		 * error level messages. Message have an accosiated "error level" and
+		 * message below the current setting are not displayed.
+		 * </p>
+		 */
+		Error,
+
+		/**
+		 * <h2>Level. 6</h2> Abend, FINISH normally.
+		 * <p>
+		 * It may RuntimeException from Factory Simulator.
+		 * </p>
+		 * 
+		 */
+		Abend,
+
+		/**
+		 * <h2>Level. XX</h2> NONE. don't display.
+		 * <p>
+		 * This Level Surpress any message via Logger.
+		 * </p>
+		 */
+		None
 	}
 
 	/**
-	 * べらべら度合いを変更するスイッチ。デフォルトはご注意レベルを表示します。。
+	 * 
 	 */
 	public static LogLevel lv = LogLevel.Notice ;
 
