@@ -34,8 +34,7 @@ public class Verify implements IVerify {
 	public boolean check(IMaterial material) {
 		this.status = GeneralStatus.Working ;
 
-		Random rand = new Random() ;
-		actualMeasure = rand.nextDouble() ;
+		actualMeasure = Math.random() ;
 
 		if (this.actualMeasure < 0.98) {
 			this.status = GeneralStatus.VerifyFine ;
