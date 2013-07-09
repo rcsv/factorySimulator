@@ -81,10 +81,15 @@ public class FactoryBuilder {
 				Logger.warnWrite( this.company.get(counter-1).toString()  );
 				counter++ ;	
 
+				//
+				// --- parse NESTed production line ---------------------------
+				//
+				
+			} else {
+				// rcsvp.fX is not exists.
+				break ;
 			}
-
-		} while (true) ;
-
+		} while (true) ;		
 	}
 
 	public static void main(String[] args) {
