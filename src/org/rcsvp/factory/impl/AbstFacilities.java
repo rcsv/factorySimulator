@@ -1,6 +1,7 @@
 package org.rcsvp.factory.impl ;
 
 import org.rcsvp.Logger ;
+import org.rcsvp.factory.IAlertBox ;
 import org.rcsvp.factory.IControlCenter ;
 import org.rcsvp.factory.IParent ;
 import org.rcsvp.factory.IRegistrable ;
