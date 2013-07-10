@@ -13,7 +13,8 @@ import org.rcsvp.factory.IRegistrable.IStatusEnum ;
 public interface IAlertBox {
 
   /**
-   * Labor need to know the address of facility when warned via AlertBox.
+   * Labor need to know the addres of facilities when it warned problem via
+   * AlertBox.
    *
    * @return a reference of facility address that have a problem.
    */
