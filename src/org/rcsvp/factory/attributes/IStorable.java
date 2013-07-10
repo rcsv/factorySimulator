@@ -1,6 +1,6 @@
-package org.rcsvp.factory.attributes ;
+package org.rcsvp.factory.attributes;
 
-import org.rcsvp.factory.IMaterial ;
+import org.rcsvp.factory.IMaterial;
 
 /**
  * IStorable interface represents that are able to store Materials into itself.
@@ -18,13 +18,13 @@ public interface IStorable {
 	 * 
 	 * @return a reference implemented IMaterial
 	 */
-	IMaterial getMaterial() ;
+	IMaterial getMaterial();
 
 	/**
 	 * IStorable implemented class have a capacity as a constraint. default
-	 * capacity threshold display a limit to the empty / full with material.
-	 * It should send KANBAN to previous procedure when thru a threshold.
+	 * capacity threshold display a limit to the empty / full with material. It
+	 * should send KANBAN to previous procedure when thru a threshold.
 	 */
-	float defaultCapacityThreshold = 0.125f ;
+	float defaultCapacityThreshold = 0.125f;
 
 }

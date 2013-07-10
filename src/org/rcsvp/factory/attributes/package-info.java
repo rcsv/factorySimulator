@@ -1,5 +1,6 @@
 /**
- * Factory Simulator で登場する物体の属性という側面からとらえたインターフェイス群をそろえる。
+ * Attributes package is a collection of interfaces related Behavior, Styles,
+ * Category and Attributes of each object in factories.
  * 
  * @author Rcsvp.org
  * @date Jul 10, 2013
