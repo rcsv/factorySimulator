@@ -4,3 +4,6 @@
 *.jar
 *.war
 *.ear
+
+# Excel file
+*.~$*.xlsx
