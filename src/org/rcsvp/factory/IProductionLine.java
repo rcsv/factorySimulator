@@ -1,5 +1,7 @@
 package org.rcsvp.factory ;
 
+import org.rcsvp.factory.attributes.IRegistrable ;
+
 /**
  * IProductionLine interface represents a production line of a factory
  * implemented interface IFactory. IProductionLine has many Procedures, linked

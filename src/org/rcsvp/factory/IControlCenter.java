@@ -2,7 +2,7 @@ package org.rcsvp.factory ;
 
 import java.util.Map ;
 
-import org.rcsvp.factory.IRegistrable.* ;
+import org.rcsvp.factory.attributes.IRegistrable.* ;
 
 /**
  * IControlCenter represents a management-room of a factory. It can be checked

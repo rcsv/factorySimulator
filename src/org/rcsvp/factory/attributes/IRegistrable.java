@@ -1,4 +1,6 @@
-package org.rcsvp.factory ;
+package org.rcsvp.factory.attributes ;
+
+import org.rcsvp.factory.IControlCenter ;
 
 /**
  * IRegistrable interface represents set information into a IControlCenter

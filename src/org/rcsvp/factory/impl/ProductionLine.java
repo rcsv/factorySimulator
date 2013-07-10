@@ -5,7 +5,7 @@ import java.util.* ;
 import org.rcsvp.Logger ;
 import org.rcsvp.factory.IProcedure ;
 import org.rcsvp.factory.IProductionLine ;
-import org.rcsvp.factory.IRegistrable ;
+import org.rcsvp.factory.attributes.IRegistrable ;
 
 public class ProductionLine extends AbstFacilities implements IProductionLine {
 

@@ -1,5 +1,7 @@
 package org.rcsvp.factory ;
 
+import org.rcsvp.factory.attributes.IRegistrable ;
+
 /**
  * IProcedure interface represents a procedure of a Production Line. Fabricate
  * material with plenty of method including press, bend, slice, punch and burn.

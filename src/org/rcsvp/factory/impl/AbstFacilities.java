@@ -4,7 +4,7 @@ import org.rcsvp.Logger ;
 import org.rcsvp.factory.IAlertBox ;
 import org.rcsvp.factory.IControlCenter ;
 import org.rcsvp.factory.IParent ;
-import org.rcsvp.factory.IRegistrable ;
+import org.rcsvp.factory.attributes.IRegistrable ;
 
 /**
  * AbstFacility class represent a workflow of this simulation object. there are

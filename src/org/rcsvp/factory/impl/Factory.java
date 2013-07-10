@@ -6,7 +6,7 @@ import org.rcsvp.Logger ;
 import org.rcsvp.factory.IFactory ;
 import org.rcsvp.factory.ILabor ;
 import org.rcsvp.factory.IProductionLine ;
-import org.rcsvp.factory.IRegistrable ;
+import org.rcsvp.factory.attributes.IRegistrable ;
 
 /**
  * Factory class is a simple implementation of IFactory interface.

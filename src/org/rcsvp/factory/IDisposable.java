@@ -1,5 +1,7 @@
 package org.rcsvp.factory ;
 
+import org.rcsvp.factory.attributes.IRegistrable ;
+
 /**
  * IDisposable interface represents a disposable tools for fabrication. In
  * fabricate materials to product, tool got galls more and more. It called

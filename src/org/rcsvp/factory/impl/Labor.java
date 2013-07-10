@@ -7,9 +7,9 @@ import org.rcsvp.factory.ICare ;
 import org.rcsvp.factory.IDisposable ;
 import org.rcsvp.factory.IFactory ;
 import org.rcsvp.factory.ILabor ;
-import org.rcsvp.factory.IRegistrable ;
 import org.rcsvp.factory.IShelf ;
 import org.rcsvp.factory.IControlCenter.IAlertBox ;
+import org.rcsvp.factory.attributes.IRegistrable ;
 import org.rcsvp.Logger ;
 
 public class Labor extends AbstFacilities implements ILabor {

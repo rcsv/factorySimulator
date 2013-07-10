@@ -1,8 +1,8 @@
 package org.rcsvp.factory.impl ;
 
-import org.rcsvp.factory.IRegistrable ;
 import org.rcsvp.factory.IAlertBox ;
-import org.rcsvp.factory.IRegistrable.* ;
+import org.rcsvp.factory.attributes.IRegistrable ;
+import org.rcsvp.factory.attributes.IRegistrable.* ;
 
 public class AlertBox implements IAlertBox {
 

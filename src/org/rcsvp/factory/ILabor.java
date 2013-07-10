@@ -1,5 +1,7 @@
 package org.rcsvp.factory ;
 
+import org.rcsvp.factory.attributes.IRegistrable ;
+
 /**
  * ILabor interface represents a worker belonging to a department related
  * "factory control" in a factory.

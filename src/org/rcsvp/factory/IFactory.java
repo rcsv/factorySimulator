@@ -1,5 +1,7 @@
 package org.rcsvp.factory ;
 
+import org.rcsvp.factory.attributes.IRegistrable ;
+
 /**
  * Interface IFactory represents Manufacturing factory. it products lots of
  * merchandises from several materials. In common case, a manufacturing company
