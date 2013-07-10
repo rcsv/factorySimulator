@@ -18,12 +18,6 @@ import org.rcsvp.factory.IRegistrable.* ;
  */
 public interface IControlCenter {
 
-	interface IAlertBox {
-		IRegistrable getTarget() ;
-
-		IStatusEnum getStatus() ;
-	}
-
 	Map<String, IAlertBox> getConsole() ;
 
 	boolean powerOff() ;
