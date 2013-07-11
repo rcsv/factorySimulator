@@ -27,4 +27,10 @@ public interface IAlertBox {
 	 */
 	IStatus getStatus() ;
 
+	/**
+	 * update information. I concerned that confuse me, IDisposable differ from
+	 * other IRegistrable interface about holding status.
+	 */
+	void update() ;
+
 }
