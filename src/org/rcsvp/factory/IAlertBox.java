@@ -1,4 +1,4 @@
-package org.rcsvp ;
+package org.rcsvp.factory ;
 
 import org.rcsvp.factory.attributes.* ;
 
