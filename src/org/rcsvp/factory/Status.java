@@ -1,7 +1,5 @@
 package org.rcsvp.factory ;
 
-import org.rcsvp.factory.attributes.IStatusEnum ;
-
 /**
  * Enumeration Status represents objects' status for factory simulator. Labor
  * and other several instances check if related object status is fine.
@@ -10,7 +8,7 @@ import org.rcsvp.factory.attributes.IStatusEnum ;
  * @date Jul 9, 2013
  * 
  */
-public enum Status implements IStatusEnum {
+public enum Status implements IStatus {
 
 	/**
 	 * Ready status represents finished initialized process completely. All
