@@ -1,32 +1,30 @@
 package org.rcsvp.factory ;
 
-import java.util.Map ;
-
-import org.rcsvp.factory.attributes.IRegistrable.* ;
-
 /**
- * IControlCenter represents a management-room of a factory. It can be checked
- * all status in a factory's situation. Worker instance that implemented ILabor
- * interface check and action triggered by it.
+ * IControlCenter upgrade feature from version INITIAL. It specializes related
+ * SIMULATOR features. At first, this interface have a timeScale ---decide
+ * simulator speed--- feature.
  * 
- * {$Id$}
- * 
- * @see ILabor
  * @author Rcsvp.org
- * @date Jul 6, 2013
+ * @date Jul 11, 2013
  * 
  */
 public interface IControlCenter {
 
-	Map<String, IAlertBox> getConsole() ;
-
-	boolean powerOff() ;
-
-	void setFactory(IFactory factory) ;
-
-	long getTimeScale() ;
-
+	/**
+	 * Utility #1 set time scale of factory simulator speed.
+	 * 
+	 * @param timeScale
+	 *            speed range of factory simulator.
+	 */
 	void setTimeScale(long timeScale) ;
 
-	boolean notify(IAlertBox alertbox) ;
+	/**
+	 * factory Simulator have to use this range when call Thread#sleep(), wait()
+	 * methods.
+	 * 
+	 * @return zero over integer value.
+	 */
+	long getTimeScale() ;
+
 }

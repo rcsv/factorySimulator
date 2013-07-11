@@ -1,28 +1,45 @@
 package org.rcsvp ;
 
+import java.io.PrintStream ;
 import java.text.DateFormat ;
 import java.text.SimpleDateFormat ;
 import java.util.Date ;
 
 /**
- * Re-develop java.util.logging.Logger (via only Console). It provides 6
+ * Re-develop java.util.logging.Logger (via only Console). It provides six
  * severity level in this implementation. I see, I didn't know the existence of
- * java.util.logging.*. I just hate call a method getGlobal().
+ * java.util.logging.*. I just hate call a method including getGlobal as far.
  * 
  * <h2>How to use this logger</h2> Call six static method like:
- * <code>Logger.debugWrite( "something" ) ;</code> when use these methods. To
- * filtering logging by using LogLevel, set {@link #lv} directory.
+ * <code>Logger.debug( "something" ) ;</code> when use these methods. To
+ * filtering logging level by call setLevel.
  * 
  * @author Rcsvp.org
+ * @date Jul 6, 2013
+ * @since 0.9
  * 
  */
 public class Logger {
 
 	/**
-	 * LogLevel have 2 role. one case, a level of error priority
+	 * default level set Notice.
 	 */
-	public enum LogLevel {
+	private static Level level = Level.Notice ;
 
+	/** 
+         * 
+         */
+	private static PrintStream output = System.out ;
+
+	/**
+	 * Loglevel have two roles. Once case, a level of message priority, other
+	 * hands, filtering level.
+	 * 
+	 * @author Rcsvp.org
+	 * @date Jul 6, 2013
+	 * @since 0.9
+	 */
+	public enum Level {
 		/**
 		 * <h2>Level. 1</h2> Debug.
 		 * <p>
@@ -55,20 +72,13 @@ public class Logger {
 		 * "notify level" and messages below the current setting are not
 		 * displayed.
 		 * </p>
-		 * </p>
 		 */
 		Notice,
 
 		/**
-		 * <h2>Level. 4</h2> Warn.
-		 * <p>
-		 * Static warn / messaging instance for Factory Simulator. This number
-		 * level defines a set of static methods that can be called to produce
-		 * warning level messages. Message have an associated "warn level" and
-		 * messages below the current setting are not displayed.
-		 * </p>
+		 * <h2>Level. 4</h2> Warning.
 		 */
-		Warn,
+		Warning,
 
 		/**
 		 * <h2>Level. 5</h2> Error.
@@ -93,55 +103,97 @@ public class Logger {
 		/**
 		 * <h2>Level. XX</h2> NONE. don't display.
 		 * <p>
-		 * This Level Surpress any message via Logger.
+		 * This Level means suppress any message via Logger.
 		 * </p>
 		 */
 		None
 	}
 
 	/**
+	 * print debug message.
 	 * 
+	 * @param msg
+	 *            a message to display
 	 */
-	public static LogLevel lv = LogLevel.Notice ;
-
-	public static void abendWrite(String msg) {
-		write("[ABEND] " + msg, LogLevel.Abend) ;
-	}
-
-	public static void debugWrite(String msg) {
-		write("[DEBUG] " + msg, LogLevel.Debug) ;
-	}
-
-	public static void errorWrite(String msg) {
-		write("[ERROR] " + msg, LogLevel.Error) ;
-	}
-
-	public static void infoWrite(String msg) {
-		write("[FINE ] " + msg, LogLevel.Info) ;
-	}
-
-	public static void noticeWrite(String msg) {
-		write("[NOTE ] " + msg, LogLevel.Notice) ;
-	}
-
-	public static void warnWrite(String msg) {
-		write("[WARN ] " + msg, LogLevel.Warn) ;
+	public static void debug(String msg) {
+		write("[DEBUG] " + msg, Level.Debug) ;
 	}
 
 	/**
-	 * 共通部品。
+	 * print information message.
 	 * 
 	 * @param msg
+	 *            a message to display
 	 */
-	private static void write(String msg, LogLevel x) {
-		if (lv.ordinal() <= x.ordinal()) {
+	public static void info(String msg) {
+		write("[INFO ] " + msg, Level.Info) ;
+	}
+
+	/**
+	 * print notice message.
+	 * 
+	 * @param msg
+	 *            a message to display
+	 */
+	public static void notice(String msg) {
+		write("[NOTE] " + msg, Level.Notice) ;
+	}
+
+	/**
+	 * print warning message
+	 * 
+	 * @param msg
+	 *            a message to display
+	 */
+	public static void warning(String msg) {
+		write("[WARN ] " + msg, Level.Warning) ;
+	}
+
+	/**
+	 * print error message
+	 * 
+	 * @param msg
+	 *            a message to display
+	 */
+	public static void error(String msg) {
+		write("[ERROR] " + msg, Level.Error) ;
+	}
+
+	/**
+	 * print abnormal finished message (Could you really display it?).
+	 * 
+	 * @param msg
+	 *            a message to display
+	 */
+	public static void abend(String msg) {
+		write("[ABEND] " + msg, Level.Abend) ;
+	}
+
+	/**
+	 * Common method send string to java.io.PrintStream
+	 * 
+	 * @param msg
+	 * @param x
+	 */
+	private static void write(String msg, Level x) {
+		if (Logger.level.ordinal() <= x.ordinal()) {
 			DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss") ;
-			System.out.println("[" + df.format(new Date()) + "] " + msg) ;
+			Logger.output.println("[" + df.format(new Date()) + "] " + msg) ;
 		}
 	}
 
 	/**
-	 * コンストラクタ自重。
+	 * set level for message filter.
+	 * 
+	 * @param level
+	 *            a level for message filtering.
+	 */
+	public static void setLevel(Level level) {
+		Logger.level = level ;
+	}
+
+	/**
+	 * Suppress constructor.
 	 */
 	private Logger() {
 	}
