@@ -33,5 +33,11 @@ public interface IMonitorRoom {
 	 * @return
 	 */
 	boolean register(IAlertBox alertbox) ;
+	
+	/**
+	 * When Labor check all tasks done, Labor try to shutdown whole Factory.
+	 * @return
+	 */
+	boolean powerOff () ;
 
 }
