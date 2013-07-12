@@ -26,14 +26,14 @@ public class Logger {
 	 */
 	private static Level level = Level.Notice ;
 
-	/** 
-         * 
-         */
+	/**
+	 * specify PrintStream. It is console default.
+	 */
 	private static PrintStream output = System.out ;
 
 	/**
-	 * Loglevel have two roles. Once case, a level of message priority, other
-	 * hands, filtering level.
+	 * Enumeration Level have two roles. Once case, a level of message priority,
+	 * other hands, for message filtering level.
 	 * 
 	 * @author Rcsvp.org
 	 * @date Jul 6, 2013
