@@ -68,38 +68,64 @@ public class Warehouse extends AbstFacilities implements IWarehouse {
 	protected void bootUp() {
 		Logger.debug(this.name + " : open the shutter.") ;
 	}
-	
+
 	@Override
 	protected boolean otherCheck() {
 		return true ;
 	}
-	
-	protected void finishProcess(){
-		
+
+	protected void finishProcess() {
+
 	}
 
 	@Override
 	public IMaterial getMaterial() {
-		// TODO Auto-generated method stub
 		return null ;
 	}
 
 	@Override
-	public void setLotsMaterials(long number) {
-		// TODO Auto-generated method stub
-		
+	public void setLotsMaterials(String type, long number) {
+
+		//
+		// add materials into Warehouse after check volume of current stock.
+		long current_size = this.stocks.get(type) ;
+
+		this.stocks.put(type, number + current_size) ;
+	}
+	
+	@Override
+	public void setLotsMaterials( long number ) {
+		setLotsMaterials( "Default", number ) ;
 	}
 
 	@Override
-	public long getLotsMaterials(long number) {
-		// TODO Auto-generated method stub
+	public long getLotsMaterials(String type, long number) {
+		
+		long value = this.stocks.get(type);
+		
+		if ( value < number ) {
+			
+			//
+			// reload...
+			//
+		} else {
+			
+			this.stocks.put(type, value - number ) ;
+			
+		}
+		
 		return 0 ;
+	}
+	
+	@Override
+	public long getLotsMaterials( long number ) {
+		return getLotsMaterials( "Default", number ) ;
 	}
 
 	@Override
 	protected void routines() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

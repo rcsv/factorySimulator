@@ -10,6 +10,7 @@ import org.rcsvp.factory.IDisposable ;
 import org.rcsvp.factory.IFactory ;
 import org.rcsvp.factory.ILabor ;
 import org.rcsvp.factory.IStatus ;
+import org.rcsvp.factory.IWarehouse ;
 import org.rcsvp.factory.Status ;
 import org.rcsvp.factory.attributes.IRegistrable ;
 
@@ -78,6 +79,9 @@ public class Labor extends AbstFacilities implements ILabor {
 
 		if (canGoHome()) {
 
+			//
+			// TGI(F?)!
+			//
 			mr.powerOff() ;
 
 			this.status = Status.ShutdownNormally ;
@@ -138,15 +142,25 @@ public class Labor extends AbstFacilities implements ILabor {
 				//
 				goHome = false ;
 			}
-			
+
 		}
 
 		return goHome ;
 	}
 
+	/**
+	 * It is Working, but Labor, Factory, Disposable, Warehouse cannot shutdown
+	 * Labor start shutdown. So Labor instances never go home. check if these
+	 * instances status is just "Shutdown".
+	 * 
+	 * @param x
+	 * @return
+	 */
 	private boolean checkSurveillanceTarget(IRegistrable x) {
-		return (x instanceof ILabor || x instanceof IFactory || x instanceof IDisposable) ? true
-				: false ;
+		return (x instanceof ILabor || x instanceof IFactory
+				|| x instanceof IDisposable || x instanceof IWarehouse)
+
+		? true : false ;
 	}
 
 	@Override
