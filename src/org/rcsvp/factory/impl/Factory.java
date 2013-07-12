@@ -90,7 +90,7 @@ public class Factory extends AbstFacilities implements IFactory {
 	 *            a name of factory. It required unique.
 	 */
 	public Factory(String name) {
-		super(name, 60) ;
+		super(name, ControlCenter.getInstance().getDefaultCycleTime()) ;
 
 		initialize() ;
 	}

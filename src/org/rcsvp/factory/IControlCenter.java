@@ -6,7 +6,6 @@ package org.rcsvp.factory ;
  * 
  * @author Rcsvp.org
  * @date Jul 11, 2013
- * 
  */
 public interface IControlCenter {
 
@@ -24,4 +23,18 @@ public interface IControlCenter {
 	 * @return a positive integer value. It is greater than one.
 	 */
 	long getTimeScale() ;
+
+	/**
+	 * set a default cycle time. factory objects without IProductionLine have a
+	 * cycle time.
+	 * 
+	 * @param cycleTime
+	 */
+	void setDefaultCycleTime(long cycleTime) ;
+
+	/**
+	 * get a default cycle time.
+	 * @return
+	 */
+	long getDefaultCycleTime() ;
 }

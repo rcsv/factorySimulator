@@ -45,7 +45,7 @@ public class Labor extends AbstFacilities implements ILabor {
 	 *            a unique name for Labor instances.
 	 */
 	public Labor(String name) {
-		super(name, 60) ;
+		super(name, ControlCenter.getInstance().getDefaultCycleTime()) ;
 	}
 
 	// -----------------------------------------------------------------------
