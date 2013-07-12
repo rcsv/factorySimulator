@@ -2,8 +2,15 @@ package org.rcsvp ;
 
 import org.rcsvp.Logger.Level ;
 import org.rcsvp.factory.IFactory ;
+import org.rcsvp.factory.impl.Factory ;
 
-public class FactoryRunningTestV2 {
+/**
+ * Factory Simulator Running Test class. it is entry point.
+ * @author Rcsvp.org
+ * @date   Jul 12, 2013
+ *
+ */
+public class FactoryRunningTest {
 
 	/**
 	 * --- ENTRY POINT ---
