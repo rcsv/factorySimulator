@@ -109,7 +109,7 @@ public abstract class AbstFacilities implements IRegistrable, IParent {
 		//
 		// start working.
 		//
-		this.status = Status.Working ;
+		setStatus(Status.Working) ;
 
 		//
 		// --- phase 1: boot strap process start.
@@ -130,15 +130,23 @@ public abstract class AbstFacilities implements IRegistrable, IParent {
 			}
 			Logger.debug(this.name
 					+ " : WHILE LOOP............................") ;
-			
-			routines () ;
+
+			routines() ;
 		}
 
+		//
+		// --- phase 3: finish process
+		//
 		Logger.debug(this.name + " : THREAD FINISH.........................") ;
-		
+		setStatus(Status.ShutdownNormally) ;
+
+		finishProcess() ;
+
+		Logger.debug(this.name + " : THREAD END...........................") ;
+
 	}
-	
-	protected void setStatus ( IStatus stat ) {
+
+	protected void setStatus(IStatus stat) {
 		this.status = stat ;
 		//
 		// send MonitorRoom "update"
