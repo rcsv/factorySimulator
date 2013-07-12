@@ -6,7 +6,6 @@ package org.rcsvp.factory ;
  * 
  * @author Rcsvp.org
  * @date Jul 9, 2013
- * 
  */
 public enum Status implements IStatus {
 
