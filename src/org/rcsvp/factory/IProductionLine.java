@@ -1,5 +1,7 @@
 package org.rcsvp.factory;
 
-public interface IProductionLine {
+import org.rcsvp.factory.attributes.IRegistrable ;
+
+public interface IProductionLine extends IRegistrable {
 
 }

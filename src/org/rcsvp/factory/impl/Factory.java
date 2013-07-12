@@ -190,11 +190,39 @@ public class Factory extends AbstFacilities implements IFactory {
 		//
 		if (labors.size() != 0) {
 			Iterator<ILabor> iL = labors.values().iterator() ;
-			Executor exeLabor = Executors.newFixedThreadPool( labors.size() ) ;
+			Executor exeLabors = Executors.newFixedThreadPool(labors.size()) ;
 
 			while (iL.hasNext()) {
 
-				exeLabor.execute(iL.next()) ;
+				exeLabors.execute(iL.next()) ;
+			}
+		}
+
+		//
+		// kick start production lines
+		//
+		if (lines.size() != 0) {
+			Iterator<IProductionLine> iP = lines.values().iterator() ;
+			Executor exeLines = Executors.newFixedThreadPool(lines.size()) ;
+
+			while (iP.hasNext()) {
+
+				exeLines.execute(iP.next()) ;
+
+			}
+		}
+
+		//
+		// kick start AGV
+		//
+		if (AGVs.size() != 0) {
+			Iterator<IAgv> iA = AGVs.values().iterator() ;
+			Executor exeAgv = Executors.newFixedThreadPool(AGVs.size()) ;
+
+			while (iA.hasNext()) {
+
+				exeAgv.execute(iA.next()) ;
+
 			}
 		}
 

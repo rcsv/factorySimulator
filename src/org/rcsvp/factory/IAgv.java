@@ -1,5 +1,7 @@
-package org.rcsvp.factory;
+package org.rcsvp.factory ;
 
-public interface IAgv {
+import org.rcsvp.factory.attributes.IRegistrable ;
+
+public interface IAgv extends IRegistrable {
 
 }
