@@ -4,6 +4,7 @@ import org.rcsvp.Logger.Level ;
 import org.rcsvp.factory.IFactory ;
 import org.rcsvp.factory.ILabor ;
 import org.rcsvp.factory.impl.Factory ;
+import org.rcsvp.factory.impl.Labor ;
 
 /**
  * Factory Simulator Running Test class. it is entry point.
