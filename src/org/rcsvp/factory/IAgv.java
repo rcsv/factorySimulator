@@ -15,7 +15,7 @@ import org.rcsvp.factory.attributes.IStorable ;
  * @date Jul 12, 2013
  * 
  */
-public interface IAgv extends IRegistrable {
+public interface IAgv extends IRegistrable, IStorable {
 
 	/**
 	 * IAgv can move storage station in the factory. set Destination can

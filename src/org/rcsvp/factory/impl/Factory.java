@@ -11,6 +11,7 @@ import org.rcsvp.factory.IAgv ;
 import org.rcsvp.factory.IExport ;
 import org.rcsvp.factory.IFactory ;
 import org.rcsvp.factory.ILabor ;
+import org.rcsvp.factory.IMonitorRoom ;
 import org.rcsvp.factory.IProductionLine ;
 import org.rcsvp.factory.IWarehouse ;
 import org.rcsvp.factory.attributes.IRegistrable ;
@@ -104,6 +105,7 @@ public class Factory extends AbstFacilities implements IFactory {
 		this.lines = new HashMap<String, IProductionLine>() ;
 		this.AGVs = new HashMap<String, IAgv>() ;
 
+		this.mr = MonitorRoom.getInstance( this.name ) ;
 	}
 
 	// -----------------------------------------------------------------------
