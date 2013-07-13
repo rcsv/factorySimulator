@@ -104,6 +104,7 @@ public class Factory extends AbstFacilities implements IFactory {
 		this.lines = new HashMap<String, IProductionLine>() ;
 		this.AGVs = new HashMap<String, IAgv>() ;
 
+		this.mr = MonitorRoom.getInstance( this.name ) ;
 	}
 
 	// -----------------------------------------------------------------------

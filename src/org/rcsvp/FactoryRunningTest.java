@@ -40,5 +40,9 @@ public class FactoryRunningTest {
 		factory.register( YamadaTaro ) ;
 		
 		IWarehouse warehouse = new Warehouse( "Warehouse 13" ) ;
+		
+		factory.register(warehouse);
+		
+		Logger.debug("finish");
 	}
 }
