@@ -125,4 +125,10 @@ public class Agv extends AbstFacilities implements IAgv {
 		return true ;
 	}
 
+	@Override
+	public void setMaterial(IMaterial material) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
