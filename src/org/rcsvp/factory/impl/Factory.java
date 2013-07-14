@@ -171,12 +171,22 @@ public class Factory extends AbstFacilities implements IFactory {
 
 		return true ;
 	}
+	
+	/**
+	 * Check facility is sufficient.
+	 * - ILabor, IProductionLine, IWarehouse, and IExport must be registered. 
+	 * @return
+	 */
+	private boolean facilityCheck() {
+		return ( labors.size() != 0 && lines.size() != 0 && this.warehouse != null ) ? true : false ;
+	}
 
 	@Override
 	protected void bootUp() {
 
 		Logger.debug(this.name + " : start bootUp().......................") ;
 
+		facilityCheck() ;
 		//
 		// display information into logging.
 		//

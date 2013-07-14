@@ -36,12 +36,26 @@ public class FactoryRunningTest {
 		// warehouse, a production line, an export and
 		// an AGV.
 		//
+		
+		// 1. Labor
 		ILabor YamadaTaro = new Labor("Yamada Taro") ;
 		factory.register( YamadaTaro ) ;
 		
+		// 2. Warehouse
 		IWarehouse warehouse = new Warehouse( "Warehouse 13" ) ;
-		
 		factory.register(warehouse);
+		
+		// 3. ProductionLine
+		
+		// 4. Export
+		
+		// 5. AGV
+		
+		
+		// -------------------------------------------------------------------
+		// Start Factory's morning.
+		// -------------------------------------------------------------------
+		new Thread( factory ).start();
 		
 		Logger.debug("finish");
 	}
