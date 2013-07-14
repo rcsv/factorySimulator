@@ -3,9 +3,11 @@ package org.rcsvp ;
 import org.rcsvp.Logger.Level ;
 import org.rcsvp.factory.IFactory ;
 import org.rcsvp.factory.ILabor ;
+import org.rcsvp.factory.IProductionLine ;
 import org.rcsvp.factory.IWarehouse ;
 import org.rcsvp.factory.impl.Factory ;
 import org.rcsvp.factory.impl.Labor ;
+import org.rcsvp.factory.impl.ProductionLine ;
 import org.rcsvp.factory.impl.Warehouse ;
 
 /**
@@ -41,13 +43,12 @@ public class FactoryRunningTest {
 		ILabor YamadaTaro = new Labor("Yamada Taro") ;
 		factory.register( YamadaTaro ) ;
 		
-		// 2. Warehouse
-		IWarehouse warehouse = new Warehouse( "Warehouse 13" ) ;
-		factory.register(warehouse);
-		
 		// 3. ProductionLine
+		IProductionLine line1 = new ProductionLine( "Motor", 44, 20000 ) ;
+		factory.register(line1) ;
 		
-		// 4. Export
+		// 4. Export ( generate at factory instance)
+		// 2. Warehouse ( generate at factory instance)
 		
 		// 5. AGV
 		
