@@ -106,6 +106,10 @@ public class Factory extends AbstFacilities implements IFactory {
 		this.AGVs = new HashMap<String, IAgv>() ;
 
 		this.mr = MonitorRoom.getInstance( this.name ) ;
+		
+		this.warehouse = new Warehouse ( "warehouse of " + this.name ) ;
+		this.export    = new Export    ( "export of " + this.name ) ;
+		
 	}
 
 	// -----------------------------------------------------------------------
@@ -147,18 +151,8 @@ public class Factory extends AbstFacilities implements IFactory {
 			break ;
 
 		case "Warehouse":
-			//
-			// --- Warehouse --- IWarehouse interface
-			//
-			this.warehouse = (IWarehouse) target ;
-			break ;
-
 		case "Export":
-			//
-			// --- Export --- IExport interface
-			//
-			this.export = (IExport) target ;
-			break ;
+			Logger.error( "You try to register facilities beyond necessity. STOP." ) ;
 		default:
 
 			//

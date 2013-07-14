@@ -4,4 +4,5 @@ import org.rcsvp.factory.attributes.IRegistrable ;
 
 public interface IProductionLine extends IRegistrable {
 
+	void setNorm( long norm ) ;
 }
