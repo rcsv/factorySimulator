@@ -180,7 +180,10 @@ public class Factory extends AbstFacilities implements IFactory {
 
 		Logger.debug(this.name + " : start bootUp().......................") ;
 
-		facilityCheck() ;
+		if ( !facilityCheck() ) {
+			throw new RuntimeException( "Insufficient facilities." ) ;
+		}
+		
 		//
 		// display information into logging.
 		//
@@ -193,29 +196,27 @@ public class Factory extends AbstFacilities implements IFactory {
 
 		//
 		// kick start labors
-		//
-		if (labors.size() != 0) {
-			Iterator<ILabor> iL = labors.values().iterator() ;
-			Executor exeLabors = Executors.newFixedThreadPool(labors.size()) ;
+		// it already checked whether labors exists at facilityCheck().
+		
+		Iterator<ILabor> iL = labors.values().iterator() ;
+		Executor exeLabors = Executors.newFixedThreadPool(labors.size()) ;
 
-			while (iL.hasNext()) {
+		while (iL.hasNext()) {
 
-				exeLabors.execute(iL.next()) ;
-			}
+			exeLabors.execute(iL.next()) ;
 		}
 
 		//
 		// kick start production lines
+		// it already checked whether labors exists at facilityCheck().
 		//
-		if (lines.size() != 0) {
-			Iterator<IProductionLine> iP = lines.values().iterator() ;
-			Executor exeLines = Executors.newFixedThreadPool(lines.size()) ;
+		Iterator<IProductionLine> iP = lines.values().iterator() ;
+		Executor exeLines = Executors.newFixedThreadPool(lines.size()) ;
 
-			while (iP.hasNext()) {
+		while (iP.hasNext()) {
 
-				exeLines.execute(iP.next()) ;
+			exeLines.execute(iP.next()) ;
 
-			}
 		}
 
 		//
