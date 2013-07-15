@@ -14,25 +14,11 @@ import org.rcsvp.factory.ILabor ;
 import org.rcsvp.factory.IMonitorRoom ;
 import org.rcsvp.factory.IProductionLine ;
 import org.rcsvp.factory.IWarehouse ;
+import org.rcsvp.factory.Status ;
 import org.rcsvp.factory.attributes.IRegistrable ;
 
 /**
  * Factory class is a simple implementation of IFactory interface.
- * 
- * http://itpro.nikkeibp.co.jp/article/COLUMN/20071001/283395/
- * 
- * Concurrency Utilities では、Thread
- * クラスを明示的に使用する事はありません。その代わりに登場するのが、java.util.concurrent.Executor
- * インターフェイス、もしくはその派生インターフェイスである java.util.concurrent.ExecutorService インターフェイスです。
- * Executor インターフェイスは Runnable インターフェイスを実装したクラスで記述されるタスクを実
- * 行する execute メソッドを定義します。しかし、Executor インターフェイスではタスクの実行方法を
- * 指定する事はありません。
- * 
- * タスク実行の方法は、Executor インターフェイスを実装したクラスによって決まります。例えば、
- * java.util.concurrent.ThreadPoolExecutor クラスであれば、複数のスレッドで構成されるス
- * レッドプールを用いてタスクを実行します。
- * 例えば、100 ミリ病間スリープしてその後、標準出力にメッセージを出力するという全く役に立たないタ
- * スクを Executor インターフェイスを使って実行してみましょう。
  * 
  * @author Rcsvp.org
  * @date Jul 12, 2013
@@ -105,11 +91,11 @@ public class Factory extends AbstFacilities implements IFactory {
 		this.lines = new HashMap<String, IProductionLine>() ;
 		this.AGVs = new HashMap<String, IAgv>() ;
 
-		this.mr = MonitorRoom.getInstance( this.name ) ;
-		
-		this.warehouse = new Warehouse ( "warehouse of " + this.name ) ;
-		this.export    = new Export    ( "export of " + this.name ) ;
-		
+		this.mr = MonitorRoom.getInstance(this.name) ;
+
+		this.warehouse = new Warehouse("warehouse of " + this.name) ;
+		this.export = new Export("export of " + this.name) ;
+
 	}
 
 	// -----------------------------------------------------------------------
@@ -152,7 +138,7 @@ public class Factory extends AbstFacilities implements IFactory {
 
 		case "Warehouse":
 		case "Export":
-			Logger.error( "You try to register facilities beyond necessity. STOP." ) ;
+			Logger.error("You try to register facilities beyond necessity. STOP.") ;
 		default:
 
 			//
@@ -165,14 +151,16 @@ public class Factory extends AbstFacilities implements IFactory {
 
 		return true ;
 	}
-	
+
 	/**
 	 * Check facility is sufficient.
-	 * - ILabor, IProductionLine, IWarehouse, and IExport must be registered. 
+	 * - ILabor, IProductionLine, IWarehouse, and IExport must be registered.
+	 * 
 	 * @return
 	 */
 	private boolean facilityCheck() {
-		return ( labors.size() != 0 && lines.size() != 0 && this.warehouse != null ) ? true : false ;
+		return (labors.size() != 0 && lines.size() != 0 && this.warehouse != null) ? true
+				: false ;
 	}
 
 	@Override
@@ -180,10 +168,10 @@ public class Factory extends AbstFacilities implements IFactory {
 
 		Logger.debug(this.name + " : start bootUp().......................") ;
 
-		if ( !facilityCheck() ) {
-			throw new RuntimeException( "Insufficient facilities." ) ;
+		if (!facilityCheck()) {
+			throw new RuntimeException("Insufficient facilities.") ;
 		}
-		
+
 		//
 		// display information into logging.
 		//
@@ -197,7 +185,7 @@ public class Factory extends AbstFacilities implements IFactory {
 		//
 		// kick start labors
 		// it already checked whether labors exists at facilityCheck().
-		
+
 		Iterator<ILabor> iL = labors.values().iterator() ;
 		Executor exeLabors = Executors.newFixedThreadPool(labors.size()) ;
 
@@ -238,19 +226,65 @@ public class Factory extends AbstFacilities implements IFactory {
 
 	@Override
 	protected boolean otherCheck() {
-		// TODO Auto-generated method stub
-		return false ;
+		return true ;
 	}
 
 	@Override
 	protected void routines() {
-		// TODO Auto-generated method stub
+
+		Logger.debug(this.name + " : working.") ;
 
 	}
 
 	@Override
 	protected void finishProcess() {
-		// TODO Auto-generated method stub
 
+		//
+		// Shutdown labors.
+		//
+
+		ILabor xL = null ;
+		Iterator<ILabor> iL = labors.values().iterator() ;
+
+		while (iL.hasNext()) {
+
+			xL = iL.next() ;
+			xL.shutdown(Status.ShutdownNormally) ;
+
+		}
+
+		//
+		// Shutdown Production Line
+		//
+		IProductionLine xP = null ;
+		Iterator<IProductionLine> iP = lines.values().iterator() ;
+
+		while (iP.hasNext()) {
+
+			xP = iP.next() ;
+			xP.shutdown(Status.ShutdownNormally) ;
+		}
+
+		//
+		// Shutdown AGV.
+		//
+
+		IAgv xA = null ;
+		Iterator<IAgv> iA = AGVs.values().iterator() ;
+
+		while (iA.hasNext()) {
+
+			xA = iA.next() ;
+			xA.shutdown(Status.ShutdownNormally) ;
+		}
+
+		//
+		// Shutdown? 
+		// Export / Warehouse
+		//
+
+		this.warehouse.shutdown(Status.ShutdownNormally) ;
+
+		// EXPORT SHUTDOWN ?
 	}
 }
