@@ -47,4 +47,10 @@ public interface IWarehouse extends IRegistrable, IStorable {
 	 * @return a number facility can go away with.
 	 */
 	long getLotsMaterials(long number) ;
+
+	/**
+	 * DefaultMaterialType.
+	 */
+	String defaultMaterialType = "Default" ;
+	
 }
