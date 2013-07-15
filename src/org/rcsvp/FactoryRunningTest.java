@@ -50,7 +50,8 @@ public class FactoryRunningTest {
 		// 2. Warehouse ( generate at factory instance)
 		
 		// 5. AGV
-		
+		IAgv agv1 = new Agv( "AGV1" ) ;
+		factory.register( agv1 ) ;
 		
 		// -------------------------------------------------------------------
 		// Start Factory's morning.
