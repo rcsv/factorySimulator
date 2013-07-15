@@ -9,7 +9,6 @@ import java.util.Date ;
  * Re-develop java.util.logging.Logger (via only Console). It provides six
  * severity level in this implementation. I see, I didn't know the existence of
  * java.util.logging.*. I just hate call a method including getGlobal as far.
- * 
  * <h2>How to use this logger</h2> Call six static method like:
  * <code>Logger.debug( "something" ) ;</code> when use these methods. To
  * filtering logging level by call setLevel.
@@ -17,7 +16,6 @@ import java.util.Date ;
  * @author Rcsvp.org
  * @date Jul 6, 2013
  * @since 0.9
- * 
  */
 public class Logger {
 
@@ -96,7 +94,6 @@ public class Logger {
 		 * <p>
 		 * It may RuntimeException from Factory Simulator.
 		 * </p>
-		 * 
 		 */
 		Abend,
 
@@ -136,7 +133,7 @@ public class Logger {
 	 *            a message to display
 	 */
 	public static void notice(String msg) {
-		write("[NOTE] " + msg, Level.Notice) ;
+		write("[NOTE ] " + msg, Level.Notice) ;
 	}
 
 	/**
