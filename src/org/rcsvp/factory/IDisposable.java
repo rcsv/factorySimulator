@@ -1,5 +1,7 @@
 package org.rcsvp.factory;
 
-public interface IDisposable {
+import org.rcsvp.factory.attributes.IRegistrable ;
+
+public interface IDisposable extends IRegistrable {
 
 }

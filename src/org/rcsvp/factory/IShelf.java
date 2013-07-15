@@ -1,5 +1,7 @@
 package org.rcsvp.factory;
 
-public interface IShelf {
+import org.rcsvp.factory.attributes.IStorable ;
+
+public interface IShelf extends IStorable {
 
 }

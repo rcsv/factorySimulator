@@ -74,6 +74,7 @@ public class ProductionLine extends AbstFacilities implements IProductionLine {
 			// --- procedure --- IProcedure implementation
 			//
 
+			((IProcedure)target).setTactTime(this.tactTime);
 			procs.add((IProcedure) target) ;
 
 			break ;
@@ -97,7 +98,7 @@ public class ProductionLine extends AbstFacilities implements IProductionLine {
 	 */
 	private boolean facilityCheck() {
 
-		return (procs.size() != 0 && this.norm < 0) ? true : false ;
+		return (procs.size() != 0 && this.norm > 0) ? true : false ;
 
 	}
 

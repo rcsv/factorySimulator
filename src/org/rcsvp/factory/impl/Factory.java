@@ -16,6 +16,7 @@ import org.rcsvp.factory.IProductionLine ;
 import org.rcsvp.factory.IWarehouse ;
 import org.rcsvp.factory.Status ;
 import org.rcsvp.factory.attributes.IRegistrable ;
+import org.rcsvp.factory.attributes.IStorable ;
 
 /**
  * Factory class is a simple implementation of IFactory interface.
@@ -92,7 +93,6 @@ public class Factory extends AbstFacilities implements IFactory {
 
 		this.mr = MonitorRoom.getInstance(this.name) ;
 
-		this.warehouse = new Warehouse("warehouse of " + this.name) ;
 		this.export = new Export("export of " + this.name) ;
 
 	}
@@ -136,6 +136,7 @@ public class Factory extends AbstFacilities implements IFactory {
 			break ;
 
 		case "Warehouse":
+			this.warehouse = (IWarehouse) target ;
 		case "Export":
 			Logger.error("You try to register facilities beyond necessity. STOP.") ;
 		default:
@@ -289,4 +290,5 @@ public class Factory extends AbstFacilities implements IFactory {
 
 		// EXPORT SHUTDOWN ?
 	}
+	
 }

@@ -10,7 +10,7 @@ import org.rcsvp.factory.IMaterial ;
  * @author Rcsvp.org
  * @date Jul 10, 2013
  */
-public interface IStorable {
+public interface IStorable extends Runnable, IRegistrable {
 
 	/**
 	 * Storable interface can set capacity.

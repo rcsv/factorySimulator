@@ -88,7 +88,7 @@ public class Agv extends AbstFacilities implements IAgv {
 
 		}
 
-		Logger.debug(this.name + " : finish bootUp().....................") ;
+		Logger.debug(this.name + " : finish bootUp()......................") ;
 	}
 
 	@Override
