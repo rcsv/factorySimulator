@@ -11,7 +11,15 @@ import org.rcsvp.factory.IMaterial ;
  * @date Jul 10, 2013
  */
 public interface IStorable {
-	
+
+	/**
+	 * Storable interface can set capacity.
+	 * 
+	 * @param capacity
+	 *            a long number of capacity.
+	 */
+	void setCapacity(long capacity) ;
+
 	/**
 	 * getCapacity method can check a capacity value of IStorable implementation
 	 * instances.
@@ -30,7 +38,8 @@ public interface IStorable {
 	/**
 	 * setMaterial be able to set Material into IStorable.
 	 * 
-	 * @param volume size of material number.
+	 * @param volume
+	 *            size of material number.
 	 */
 	long setMaterials(long volume) ;
 
