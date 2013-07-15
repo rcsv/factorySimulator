@@ -21,6 +21,9 @@ public class Agv extends AbstFacilities implements IAgv {
 	 */
 	private List<IStorable> destination ;
 
+	/**
+	 * Capacity.
+	 */
 	private long capacity ;
 
 	// -----------------------------------------------------------------------
@@ -28,31 +31,16 @@ public class Agv extends AbstFacilities implements IAgv {
 	// -----------------------------------------------------------------------
 
 	/**
-	 * Construct AGV instance with two arguments: agv ID and speed.
-	 * 
-	 * @param name
-	 *            a unique ID of AGV.
-	 * @param tactTime
-	 *            move speed.
-	 */
-	public Agv(String name, long tactTime, long capacity) {
-		super(name, tactTime) ;
-		this.capacity = capacity ;
-
-		initialize() ;
-	}
-
-	/**
 	 * Construct AGV instance with a argument: AGV ID.
 	 * 
 	 * @param name
 	 *            a unique ID of AGV.
 	 */
-	public Agv(String name, long capacity) {
+	public Agv(String name) {
 		super(name, ControlCenter.getInstance().getDefaultCycleTime()) ;
-		this.capacity = capacity ;
 
 		initialize() ;
+
 	}
 
 	/**
@@ -61,6 +49,8 @@ public class Agv extends AbstFacilities implements IAgv {
 	private void initialize() {
 
 		this.destination = new LinkedList<IStorable>() ;
+
+		this.capacity = 0 ;
 
 	}
 
@@ -82,21 +72,23 @@ public class Agv extends AbstFacilities implements IAgv {
 		this.destination.add(target) ;
 	}
 
+	private boolean facilityCheck() {
+		return (destination.size() >= 2 && capacity > 0) ? true : false ;
+	}
+
 	@Override
 	protected void bootUp() {
-		Logger.debug(this.name + " : initializing...") ;
 
-		//
-		// Check destination number. throw RuntimeException when it has few
-		// numbers of destination.
-		//
-		// 0 : RuntimeException
-		// 1 : RuntimeException
-		//
-		if (this.destination.size() < 2) {
-			throw new RuntimeException() ;
+		Logger.debug(this.name + " : start bootUp().......................") ;
+
+		if (!facilityCheck()) {
+
+			throw new RuntimeException("Insufficient facilities at "
+					+ this.name) ;
+
 		}
 
+		Logger.debug(this.name + " : finish bootUp().....................") ;
 	}
 
 	@Override
@@ -126,9 +118,19 @@ public class Agv extends AbstFacilities implements IAgv {
 	}
 
 	@Override
-	public void setMaterial(IMaterial material) {
+	public void setCapacity(long capacity) {
+		this.capacity = capacity ;
+	}
+
+	@Override
+	public long getCapacity() {
+		return this.capacity ;
+	}
+
+	@Override
+	public long setMaterials(long volume) {
 		// TODO Auto-generated method stub
-		
+		return 0 ;
 	}
 
 }

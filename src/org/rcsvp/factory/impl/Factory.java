@@ -22,7 +22,6 @@ import org.rcsvp.factory.attributes.IRegistrable ;
  * 
  * @author Rcsvp.org
  * @date Jul 12, 2013
- * 
  */
 public class Factory extends AbstFacilities implements IFactory {
 
@@ -169,7 +168,10 @@ public class Factory extends AbstFacilities implements IFactory {
 		Logger.debug(this.name + " : start bootUp().......................") ;
 
 		if (!facilityCheck()) {
-			throw new RuntimeException("Insufficient facilities.") ;
+
+			throw new RuntimeException("Insufficient facilities at "
+					+ this.name) ;
+
 		}
 
 		//
@@ -221,7 +223,7 @@ public class Factory extends AbstFacilities implements IFactory {
 			}
 		}
 
-		Logger.debug(this.name + " : finish bootUp().....................") ;
+		Logger.debug(this.name + " : finish bootUp()......................") ;
 	}
 
 	@Override
@@ -279,7 +281,7 @@ public class Factory extends AbstFacilities implements IFactory {
 		}
 
 		//
-		// Shutdown? 
+		// Shutdown?
 		// Export / Warehouse
 		//
 

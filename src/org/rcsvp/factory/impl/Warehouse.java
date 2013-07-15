@@ -15,6 +15,11 @@ public class Warehouse extends AbstFacilities implements IWarehouse {
 	 */
 	private Map<String, Long> stocks ;
 
+	/**
+	 * internal variable for IStorable interface
+	 */
+	private long capacity ; // getter -- setter.
+
 	// -----------------------------------------------------------------------
 	// Constructors
 	// -----------------------------------------------------------------------
@@ -48,7 +53,10 @@ public class Warehouse extends AbstFacilities implements IWarehouse {
 	}
 
 	private void initialize() {
+
 		this.stocks = new ConcurrentHashMap<String, Long>() ;
+
+		capacity = 0 ;
 	}
 
 	// -----------------------------------------------------------------------
@@ -67,6 +75,10 @@ public class Warehouse extends AbstFacilities implements IWarehouse {
 	@Override
 	protected void bootUp() {
 		Logger.debug(this.name + " : open the shutter.") ;
+		
+		if ( this.capacity == 0 ) {
+			throw new RuntimeException() ;
+		}
 	}
 
 	@Override
@@ -79,11 +91,6 @@ public class Warehouse extends AbstFacilities implements IWarehouse {
 	}
 
 	@Override
-	public IMaterial getMaterial() {
-		return null ;
-	}
-
-	@Override
 	public void setLotsMaterials(String type, long number) {
 
 		//
@@ -92,40 +99,75 @@ public class Warehouse extends AbstFacilities implements IWarehouse {
 
 		this.stocks.put(type, number + current_size) ;
 	}
-	
+
 	@Override
-	public void setLotsMaterials( long number ) {
-		setLotsMaterials( "Default", number ) ;
+	public void setLotsMaterials(long number) {
+
+		setLotsMaterials(defaultMaterialType, number) ;
+
 	}
 
 	@Override
 	public long getLotsMaterials(String type, long number) {
-		
-		long value = this.stocks.get(type);
-		
-		if ( value < number ) {
-			
+
+		long value = this.stocks.get(type) ;
+
+		if (value < number) {
+
 			//
 			// reload...
 			//
 		} else {
-			
-			this.stocks.put(type, value - number ) ;
-			
+
+			this.stocks.put(type, value - number) ;
+
 		}
-		
+
 		return 0 ;
 	}
-	
+
 	@Override
-	public long getLotsMaterials( long number ) {
-		return getLotsMaterials( "Default", number ) ;
+	public long getLotsMaterials(long number) {
+		return getLotsMaterials(defaultMaterialType, number) ;
 	}
 
 	@Override
 	protected void routines() {
 		// TODO Auto-generated method stub
 
+	}
+
+	// -----------------------------------------------------------------------
+	// Implemented methods :: IStorable
+	// -----------------------------------------------------------------------
+
+	@Override
+	public void setCapacity(long capacity) {
+		this.capacity = capacity ;
+	}
+
+	@Override
+	public long getCapacity() {
+		return this.capacity ;
+	}
+
+	@Override
+	public IMaterial getMaterial() {
+		
+		//
+		// Maybe, I don't use this method...
+		//
+		return null ;
+	}
+
+	@Override
+	public long setMaterials(long volume) {
+		
+		//
+		// NOW PRINTING
+		//
+		
+		return 0 ;
 	}
 
 }
