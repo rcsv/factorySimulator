@@ -225,4 +225,19 @@ public class Procedure extends AbstFacilities implements IProcedure {
 		this.status = Status.Ready ;
 		return true ;
 	}
+
+	@Override
+	public void setCapacity(long capacity) {
+		return ;
+	}
+
+	@Override
+	public long getCapacity() {
+		return 0 ;
+	}
+
+	@Override
+	public long setMaterials(long volume) {
+		return 0 ;
+	}
 }

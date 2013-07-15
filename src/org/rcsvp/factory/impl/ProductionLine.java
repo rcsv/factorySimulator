@@ -74,7 +74,17 @@ public class ProductionLine extends AbstFacilities implements IProductionLine {
 			// --- procedure --- IProcedure implementation
 			//
 
-			((IProcedure)target).setTactTime(this.tactTime);
+			((IProcedure) target).setTactTime(this.tactTime) ;
+
+			if (this.procs.size() != 0) {
+
+				//
+				// set previous procedure as a shelf.
+				//
+				((IProcedure) target).register(procs.get(procs.size() - 1)) ;
+				
+			}
+
 			procs.add((IProcedure) target) ;
 
 			break ;
@@ -117,7 +127,6 @@ public class ProductionLine extends AbstFacilities implements IProductionLine {
 		// Kick start procedures.
 		// it already checked whether labors exists at facilityCheck().
 
-		
 		Iterator<IProcedure> iP = procs.iterator() ;
 		Executor exeProc = Executors.newFixedThreadPool(procs.size()) ;
 
@@ -150,9 +159,9 @@ public class ProductionLine extends AbstFacilities implements IProductionLine {
 
 	@Override
 	public void setNorm(long norm) {
-		
+
 		this.norm = norm ;
-		
+
 	}
 
 }

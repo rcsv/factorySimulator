@@ -1,9 +1,17 @@
-package org.rcsvp.factory.impl;
+package org.rcsvp.factory.impl ;
 
 import org.rcsvp.factory.IExport ;
 
 public class Export implements IExport {
 
-	public Export ( String name ) {
+	private String name ;
+
+	public Export(String name) {
+		this.name = name ;
+	}
+
+	@Override
+	public String toString() {
+		return this.name ;
 	}
 }

@@ -18,6 +18,4 @@ import org.rcsvp.factory.attributes.IRegistrable ;
  */
 public interface IFactory extends IRegistrable, IParent {
 
-	IStorable getWarehouse() ;
-	
 }

@@ -136,7 +136,9 @@ public class Factory extends AbstFacilities implements IFactory {
 			break ;
 
 		case "Warehouse":
+			
 			this.warehouse = (IWarehouse) target ;
+			break ;
 		case "Export":
 			Logger.error("You try to register facilities beyond necessity. STOP.") ;
 		default:
