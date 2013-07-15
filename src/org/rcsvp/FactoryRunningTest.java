@@ -4,11 +4,9 @@ import org.rcsvp.Logger.Level ;
 import org.rcsvp.factory.IFactory ;
 import org.rcsvp.factory.ILabor ;
 import org.rcsvp.factory.IProductionLine ;
-import org.rcsvp.factory.IWarehouse ;
 import org.rcsvp.factory.impl.Factory ;
 import org.rcsvp.factory.impl.Labor ;
 import org.rcsvp.factory.impl.ProductionLine ;
-import org.rcsvp.factory.impl.Warehouse ;
 
 /**
  * Factory Simulator Running Test class. it is entry point.
@@ -44,7 +42,8 @@ public class FactoryRunningTest {
 		factory.register( YamadaTaro ) ;
 		
 		// 3. ProductionLine
-		IProductionLine line1 = new ProductionLine( "Motor", 44, 20000 ) ;
+		IProductionLine line1 = new ProductionLine( "Motor", 44 ); 
+		line1.setNorm( 20000 ) ;
 		factory.register(line1) ;
 		
 		// 4. Export ( generate at factory instance)
