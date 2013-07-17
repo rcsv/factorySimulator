@@ -36,7 +36,7 @@ public class FactoryRunningTest {
 		//
 		// Generate Factory
 		//
-		IFactory factory = new Factory("Handa Denshi Factory") ;
+		IFactory factory = new Factory("Sample Factory") ;
 
 		//
 		// first level instances. I have to create instances a labor, a
@@ -49,7 +49,7 @@ public class FactoryRunningTest {
 		factory.register(YamadaTaro) ;
 
 		// 2. Warehouse ( generate at factory instance)
-		IWarehouse warehouse = new Warehouse("Handa Densi's Warehouse") ;
+		IWarehouse warehouse = new Warehouse("Sample Factory's Warehouse") ;
 		warehouse.setCapacity(20000) ;
 		factory.register(warehouse) ;
 
