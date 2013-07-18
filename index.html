@@ -4,11 +4,11 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Factorysimulator : 生産ラインを仮想的に作り上げて、工場がどのような情報を扱っているのかに付いて考察するためのシミュレータ。特にこれ自体が生産的な何かをする訳ではない。" />
+    <meta name="description" content="factory Simulator : A simulator of factory. It exists for checking logistics timing, detecting problem of production line." />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Factorysimulator</title>
+    <title>factory Simulator</title>
   </head>
 
   <body>
@@ -18,8 +18,8 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/rcsv/factorySimulator">View on GitHub</a>
 
-          <h1 id="project_title">Factorysimulator</h1>
-          <h2 id="project_tagline">生産ラインを仮想的に作り上げて、工場がどのような情報を扱っているのかに付いて考察するためのシミュレータ。特にこれ自体が生産的な何かをする訳ではない。</h2>
+          <h1 id="project_title">factory Simulator</h1>
+          <h2 id="project_tagline">A simulator of factory. It exists for checking logistics timing, detecting problem of production line.</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/rcsv/factorySimulator/zipball/master">Download this project as a .zip file</a>
@@ -43,13 +43,43 @@
 
 <p><strong>NOTE</strong>: ノードの上からインスタンスを構築していってください。ボトムアップで構築すると集中管理コンソールに相当するインスタンスの共有に失敗します。現段階では RuntimeException() を送信し、Factory Simulator は停止します。</p>
 
+<h2>
+<a name="hierarchy" class="anchor" href="#hierarchy"><span class="octicon octicon-link"></span></a>Hierarchy</h2>
+
 <blockquote>
+<p>factory</p>
+
+<blockquote>
+<p>MonitorRoom
+AGV
+Export
+Labor
+Production Line</p>
+
+<blockquote>
+<p>Procedures</p>
+
+<blockquote>
+<p>Shelf
+Disposable Tools
+Verification</p>
+
+<blockquote>
+<p>Tolerance</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+
+<h2>
+<a name="components" class="anchor" href="#components"><span class="octicon octicon-link"></span></a>Components</h2>
+
 <h3>
 <a name="factory" class="anchor" href="#factory"><span class="octicon octicon-link"></span></a>Factory</h3>
 
 <p>工場を表現しています。register メソッドを使って「生産ライン」と「従業員」の２種類が登録できます。</p>
 
-<blockquote>
 <h3>
 <a name="labor" class="anchor" href="#labor"><span class="octicon octicon-link"></span></a>Labor</h3>
 
@@ -60,13 +90,11 @@
 
 <p>生産ラインを表現しています。register メソッドを使って「工程」を登録する事が出来ます。初期設定の段階では、その日の製品をくみ上げなければならない数、すなわちノルマと、その生産ラインが持つタクトタイムを設定します。タクトタイムについては別途ぐぐってください。</p>
 
-<blockquote>
 <h3>
 <a name="procedure" class="anchor" href="#procedure"><span class="octicon octicon-link"></span></a>Procedure</h3>
 
 <p>生産ラインを構成する製造工程ひとつひとつを表現しています。register メソッドを使って「在庫棚」「消耗品」「検証項目」を登録する事が出来ます。この製造工程は登録された製造ラインが指定したタクトタイムで全て動作します。各工程は在庫棚、または前工程から材料を受け取り、自らの工程で任意の時間を消費して構築していきます。消耗品は必ず一つの材料につき一度ずつ使用します。工程内部の作業が完了したら、登録した検証項目の検証作業に入ります。検証項目にひっかかった加工品目は「不良品」と見なされ、次の工程にはまわされません。不良品置き場へと排出されていきます。（現段階ではその不良品置き場にたまった材料は誰もケアせず、山積みになっていく仕様です。）完了品へと進化したものについては次工程が受け取れる状態へ移行し、完了します。</p>
 
-<blockquote>
 <h3>
 <a name="shelf" class="anchor" href="#shelf"><span class="octicon octicon-link"></span></a>Shelf</h3>
 
@@ -82,16 +110,13 @@
 
 <p>「検証項目」を表現しています。製造工程で任意の加工が成された後、実際にその加工が意図した状態になっているかどうかについて検証します。後述する「公差」に基づいて各項目を実測し、最終的に次工程へ移行できるかどうかを判別します。</p>
 
-<blockquote>
 <h3>
 <a name="tolerance" class="anchor" href="#tolerance"><span class="octicon octicon-link"></span></a>Tolerance</h3>
 
 <p>検証項目に対しての「公差」を表現しています。検証内容は寸法的な側面の Scantling, 軸のズレといった幾何的な側面の Geometrical、電気抵抗値といった側面の Electrical の３方面からの公差が用意されています。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+
+<h2>
+<a name="how-to-start-simulator" class="anchor" href="#how-to-start-simulator"><span class="octicon octicon-link"></span></a>How to start simulator</h2>
 
 <p>各項目を設定した後、工場をスレッドで包んでマルチスレッドとして開始するとシミュレーターの一日が始まります。</p>
 
@@ -113,13 +138,18 @@
 <li>v1.0: [2013-07-05] Initial release</li>
 <li>v0.0: [2013-06-01] Start designing</li>
 </ul><p><em>Author</em>: recessive programmer @rcsv_pg</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Apache License 2.0</p>
       </section>
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">Factorysimulator maintained by <a href="https://github.com/rcsv">rcsv</a></p>
+        <p class="copyright">factory Simulator maintained by <a href="https://github.com/rcsv">rcsv</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
