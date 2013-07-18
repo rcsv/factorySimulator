@@ -26,8 +26,8 @@ package org.rcsvp.factory ;
 import org.rcsvp.factory.attributes.* ;
 
 /**
- * IAlertBox represents a status notification unit in MonitorRoom. IMonitorRoom
- * use it when it notify each unit status to labor.
+ * IAlertBox represents a status notification similar to a unit in a
+ * MonitorRoom. IMonitorRoom use it when it notify each unit status to labor.
  * 
  * @author Rcsvp.org
  * @date Jul 11, 2013
