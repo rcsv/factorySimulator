@@ -64,9 +64,14 @@ public class FactoryRunningTest {
 		IProcedure proc2 = new Procedure("MotorProc2") ;
 		line1.register(proc2);
 		
+		// 3.1.1. Shelf.
 		IShelf shelf1 = new Shelf("MotorShelf1");
 		shelf1.setCapacity( 200 );
 		proc1.register(shelf1);
+		
+		// 3.1.2. Disposable tools
+		IDisposable dispo1 = new Disposable("PunchTools") ;
+		dispo1.setCapacity(20000);
 		
 
 		// 4. Export ( generate at factory instance)
