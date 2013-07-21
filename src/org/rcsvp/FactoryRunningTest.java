@@ -17,6 +17,7 @@ import org.rcsvp.factory.impl.Labor ;
 import org.rcsvp.factory.impl.Procedure ;
 import org.rcsvp.factory.impl.ProductionLine ;
 import org.rcsvp.factory.impl.Shelf ;
+import org.rcsvp.factory.impl.Verify ;
 import org.rcsvp.factory.impl.Warehouse ;
 
 /**

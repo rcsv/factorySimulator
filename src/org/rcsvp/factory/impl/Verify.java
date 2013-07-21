@@ -37,7 +37,7 @@ public class Verify implements IVerify {
 	// -----------------------------------------------------------------------
 	// Private members
 	// -----------------------------------------------------------------------
-	
+
 	/**
 	 * MonitorRoom.
 	 */
@@ -52,14 +52,28 @@ public class Verify implements IVerify {
 	 * A tolerance set.
 	 */
 	private ITolerance tolerance ;
-	
+
 	// -----------------------------------------------------------------------
 	// CONSTRUCTOR
 	// -----------------------------------------------------------------------
-	
-	public Verify ( String name, ITolerance tolerance ) {
-		
+
+	public Verify(String name, ITolerance tolerance) {
+
 		this.name = name ;
-		
+		this.tolerance = tolerance ;
+
+	}
+
+	public Verify(String name) {
+		this.name = name ;
+	}
+
+	// -----------------------------------------------------------------------
+	// Override methods
+	// -----------------------------------------------------------------------
+
+	@Override
+	public String toString() {
+		return this.name ;
 	}
 }
