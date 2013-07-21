@@ -8,6 +8,7 @@ import org.rcsvp.factory.ILabor ;
 import org.rcsvp.factory.IProcedure ;
 import org.rcsvp.factory.IProductionLine ;
 import org.rcsvp.factory.IShelf ;
+import org.rcsvp.factory.IVerify ;
 import org.rcsvp.factory.IWarehouse ;
 import org.rcsvp.factory.impl.Agv ;
 import org.rcsvp.factory.impl.Disposable ;
@@ -75,6 +76,10 @@ public class FactoryRunningTest {
 		IDisposable dispo1 = new Disposable("PunchTools") ;
 		dispo1.setCapacity(20000);
 		
+		// 3.1.4. IVerify
+		IVerify verify1 = new Verify( "Verify 1" ) ;
+		verify1.setTolerance( new Tolerance( Type.Scantling, 0.1, 0.1 ) ) ;
+		proc1.register( verify1 ) ;
 
 		// 4. Export ( generate at factory instance)
 
