@@ -23,7 +23,36 @@
  */
 package org.rcsvp.factory ;
 
+/**
+ * IVerify interface represents a set of check item and methodology of verify
+ * itself. It has one and more couples of tolerance. IVerify has just ONE
+ * tolerance set.
+ * 
+ * @author Rcsvp.org
+ * @date Jul 22, 2013
+ * 
+ */
 public interface IVerify {
 
+	/**
+	 * verify.
+	 * 
+	 * @return a result of verification.
+	 */
 	boolean verify() ;
+
+	/**
+	 * update new tolerance condition.
+	 * 
+	 * @param tolerance
+	 *            a new set of Tolerance.
+	 */
+	void setTolerance(ITolerance tolerance) ;
+
+	/**
+	 * obtain current tolerance set detail.
+	 * 
+	 * @return a set of tolerance.
+	 */
+	ITolerance getTolerance() ;
 }
