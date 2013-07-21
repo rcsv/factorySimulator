@@ -112,4 +112,9 @@ public class Disposable implements IDisposable {
 		return true ;
 	}
 
+	@Override
+	public void setCapacity(long capacity) {
+		this.limit = capacity ;
+	}
+
 }

@@ -2,6 +2,7 @@ package org.rcsvp ;
 
 import org.rcsvp.Logger.Level ;
 import org.rcsvp.factory.IAgv ;
+import org.rcsvp.factory.IDisposable ;
 import org.rcsvp.factory.IFactory ;
 import org.rcsvp.factory.ILabor ;
 import org.rcsvp.factory.IProcedure ;
@@ -9,6 +10,7 @@ import org.rcsvp.factory.IProductionLine ;
 import org.rcsvp.factory.IShelf ;
 import org.rcsvp.factory.IWarehouse ;
 import org.rcsvp.factory.impl.Agv ;
+import org.rcsvp.factory.impl.Disposable ;
 import org.rcsvp.factory.impl.Factory ;
 import org.rcsvp.factory.impl.Labor ;
 import org.rcsvp.factory.impl.Procedure ;

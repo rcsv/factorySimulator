@@ -39,4 +39,19 @@ import org.rcsvp.factory.attributes.IRegistrable ;
  */
 public interface IDisposable extends IRegistrable, ICare {
 
+	/**
+	 * It've prepared that configure use limit of tools. So, same name differ
+	 * thing of IStorable method. Take care.
+	 * 
+	 * @param capcity
+	 *            a long number of capacity.
+	 */
+	void setCapacity(long capacity) ;
+
+	/**
+	 * IDisposable implemented class have a capacity as a constraint. Default
+	 * capacity threshold that display a limit to tool broken. It should send
+	 * KANBAN to previous procedure when through a threshold.
+	 */
+	float defaultCapacityThreshold = 0.125f ;
 }
