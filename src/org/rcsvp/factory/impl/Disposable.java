@@ -46,12 +46,12 @@ public class Disposable implements IDisposable {
 	 * Access code to the Monitor Room.
 	 */
 	private IMonitorRoom mr ;
-	
+
 	/**
 	 * Status Code.
 	 */
 	private IStatus status ;
-	
+
 	/**
 	 * limit.
 	 */
@@ -61,23 +61,22 @@ public class Disposable implements IDisposable {
 	 * count.
 	 */
 	private volatile long count ;
-	
-	
+
 	// -----------------------------------------------------------------------
 	// CONSTRUCTORs
 	// -----------------------------------------------------------------------
-	
+
 	/**
 	 * Construct with a argument: name.
+	 * 
 	 * @param name
 	 */
-	public Disposable ( String name ) {
+	public Disposable(String name) {
 		this.name = name ;
 		this.count = 0 ;
-		
+
 		this.status = Status.Ready ;
 	}
-	
 
 	@Override
 	public IStatus getStatus() {
@@ -87,30 +86,30 @@ public class Disposable implements IDisposable {
 	@Override
 	public void setMonitorRoom(IMonitorRoom mr) {
 		this.mr = mr ;
-		mr.register(new AlertBox( this ) ) ;
+		mr.register(new AlertBox(this)) ;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.rcsvp.factory.attributes.IRegistrable#shutdown(org.rcsvp.factory.IStatus)
-	 */
 	@Override
 	public void shutdown(IStatus status) {
-		// TODO Auto-generated method stub
-
+		// Nothing to do.
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
-	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-
+		// It doesn't running as a thread.
 	}
 
 	@Override
 	public String toString() {
 		return this.name ;
+	}
+
+	@Override
+	public boolean care() {
+
+		this.count = 0 ;
+		this.status = Status.Ready ;
+		return true ;
 	}
 
 }
