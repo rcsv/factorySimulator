@@ -52,18 +52,43 @@ public class Verify implements IVerify {
 	 * A tolerance set.
 	 */
 	private ITolerance tolerance ;
+	
+	/**
+	 * Status
+	 */
+	private IStatus status ;
+	
+	/**
+	 * Actual Value.
+	 */
+	private volatile double actualMeasure = 0 ;
 
 	// -----------------------------------------------------------------------
 	// CONSTRUCTOR
 	// -----------------------------------------------------------------------
 
+	/**
+	 * Construct with two arguments: name and Tolerance Range set.
+	 * 
+	 * @param name
+	 * 		a name/description of Verification content
+	 * @param tolerance
+	 * 		a set of tolerance range.
+	 */
 	public Verify(String name, ITolerance tolerance) {
 
 		this.name = name ;
 		this.tolerance = tolerance ;
+		this.status = Status.Ready ;
 
 	}
 
+	/**
+	 * Construct with a argument: name
+	 * 
+	 * @param name
+	 * 		a name/description of Verification content
+	 */
 	public Verify(String name) {
 		this.name = name ;
 	}
@@ -71,6 +96,35 @@ public class Verify implements IVerify {
 	// -----------------------------------------------------------------------
 	// Override methods
 	// -----------------------------------------------------------------------
+
+	@Override
+	public boolean verify() {
+		this.status = Status.Working ;
+		
+		//
+		// It does not check right now. Simply set random value.
+		//
+		actualMeasure = Math.random() ;
+		
+		if ( this.actualMeasure < 0.98 ) {
+			this.status = Status.Ready ;
+			return true ;
+		}
+		
+		this.status = Status.Problem ;
+		return false ;
+		
+	}
+	
+	@Override
+	public void setTolerance( ITolerance tolerance ) {
+		this.tolerance = tolerance ;
+	}
+	
+	@Override
+	public ITolerance getTolerance() {
+		return this.tolerance ;
+	}
 
 	@Override
 	public String toString() {
