@@ -24,8 +24,10 @@
 package org.rcsvp.factory.impl ;
 
 import org.rcsvp.factory.IMonitorRoom ;
+import org.rcsvp.factory.IStatus ;
 import org.rcsvp.factory.ITolerance ;
 import org.rcsvp.factory.IVerify ;
+import org.rcsvp.factory.Status ;
 
 /**
  * @author Rcsvp.org
