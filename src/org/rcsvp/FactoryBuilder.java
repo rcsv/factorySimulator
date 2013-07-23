@@ -42,6 +42,7 @@ import org.rcsvp.factory.IShelf ;
 import org.rcsvp.factory.ITolerance.Type ;
 import org.rcsvp.factory.IVerify ;
 import org.rcsvp.factory.IWarehouse ;
+import org.rcsvp.factory.impl.Disposable ;
 import org.rcsvp.factory.impl.Factory ;
 import org.rcsvp.factory.impl.Labor ;
 import org.rcsvp.factory.impl.Procedure ;
@@ -123,7 +124,12 @@ public class FactoryBuilder {
 
 	}
 
+	// -----------------------------------------------------------------------
+	// 1. FACTORY
+	// -----------------------------------------------------------------------
+
 	/**
+	 * Build factory.
 	 * 
 	 */
 	private void generateFactory() {
@@ -156,9 +162,57 @@ public class FactoryBuilder {
 		}
 	}
 
+	private IFactory parseFactory(String key) {
+
+		StringTokenizer token = new StringTokenizer(key, ",") ;
+
+		String name = token.nextToken() ;
+		int capacity = Integer.parseInt(token.nextToken()) ;
+
+		IFactory x = new Factory(name) ;
+		IWarehouse w = new Warehouse(x + "'s warehouse") ;
+		w.setCapacity(capacity) ;
+		x.register(w) ;
+
+		return x ;
+	}
+
+	// -----------------------------------------------------------------------
+	// 2. LABORs
+	// -----------------------------------------------------------------------
+
 	/**
+	 * set labors into IFactory.
+	 * 
 	 * @param x
-	 * @param baseKey
+	 *            a reference of IFactory.
+	 * @param key
+	 *            key string of configuration
+	 */
+	private void setLabors(IFactory x, String key) {
+
+		String baseKey = key + ".labor" ;
+
+		int nL = Integer.parseInt(config.getProperty(baseKey)) ;
+
+		for (int i = 1; i <= nL; i++) {
+			String uniqueKey = baseKey + "." + i ;
+			ILabor labor = new Labor(uniqueKey) ;
+			x.register(labor) ;
+		}
+	}
+
+	// -----------------------------------------------------------------------
+	// 3. PRODUCTION LINES
+	// -----------------------------------------------------------------------
+
+	/**
+	 * Build production lines
+	 * 
+	 * @param x
+	 *            a reference of IFactory.
+	 * @param key
+	 *            key string of configuration
 	 */
 	private void setProductionLines(IFactory x, String key) {
 
@@ -177,9 +231,17 @@ public class FactoryBuilder {
 
 	}
 
+	// -----------------------------------------------------------------------
+	// 4. PROCEDURES
+	// -----------------------------------------------------------------------
+
 	/**
+	 * Build procedures.
+	 * 
 	 * @param x
-	 * @param string
+	 *            a reference of IProductionLine.
+	 * @param key
+	 *            key string of configuration
 	 */
 	private void setProcedures(IProductionLine x, String key) {
 
@@ -202,10 +264,87 @@ public class FactoryBuilder {
 			setVerify(tP, baseKey) ;
 		}
 
-		Logger.debug("" + nP) ;
+	}
+
+	// -----------------------------------------------------------------------
+	// 5. SHELF
+	// -----------------------------------------------------------------------
+
+	/**
+	 * @param tP
+	 * @param baseKey
+	 */
+	private void setShelves(IProcedure tP, String key) {
+
+		String baseKey = key + ".shelf" ;
+		int nS = Integer.parseInt(config.getProperty(baseKey)) ;
+
+		for (int i = 1; i <= nS; i++) {
+
+			String tS = baseKey + "." + i ;
+
+			IShelf x = parseShelf(config.getProperty(tS)) ;
+
+			tP.register(x) ;
+		}
 
 	}
 
+	/**
+	 * 
+	 * @param configValue
+	 * @return
+	 */
+	private IShelf parseShelf(String configValue) {
+
+		StringTokenizer token = new StringTokenizer(configValue, ",") ;
+		String name = token.nextToken() ;
+		long capacity = Long.parseLong(token.nextToken()) ;
+
+		return new Shelf(name, capacity) ;
+	}
+
+	// -----------------------------------------------------------------------
+	// 6. DISPOSABLE TOOLS
+	// -----------------------------------------------------------------------
+
+	/**
+	 * set disposable tools.
+	 * 
+	 * @param tP
+	 * @param baseKey
+	 */
+	private void setDispos(IProcedure tP, String key) {
+
+		String baseKey = key + ".dispos" ;
+		int nD = Integer.parseInt(config.getProperty(baseKey)) ;
+
+		for (int i = 1; i <= nD; i++) {
+
+			String tD = baseKey + "." + i ;
+			IDisposable x = parseDispos(config.getProperty(tD)) ;
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param configValue
+	 * @return
+	 */
+	private IDisposable parseDispos(String configValue) {
+
+		StringTokenizer token = new StringTokenizer(configValue, ",") ;
+		String name = token.nextToken() ;
+		long useLimit = Long.parseLong(token.nextToken()) ;
+
+		return new Disposable(name, useLimit) ;
+	}
+
+	// -----------------------------------------------------------------------
+	// 6. DISPOSABLE TOOLS
+	// -----------------------------------------------------------------------
+	
 	/**
 	 * @param tP
 	 * @param baseKey
@@ -221,7 +360,7 @@ public class FactoryBuilder {
 
 			IVerify verify = parseVerify(config.getProperty(tV)) ;
 
-			//
+			// TODO
 			// tP.register( verify ) ;
 			//
 		}
@@ -256,86 +395,8 @@ public class FactoryBuilder {
 
 		return x ;
 	}
-
-	/**
-	 * @param tP
-	 * @param baseKey
-	 */
-	private void setDispos(IProcedure tP, String key) {
-
-		String baseKey = key + ".dispos" ;
-		int nD = Integer.parseInt(config.getProperty(baseKey)) ;
-
-		for (int i = 1; i <= nD; i++) {
-
-			String tD = baseKey + "." + i ;
-			IDisposable x = parseDispos(config.getProperty(tD)) ;
-		}
-
-	}
-
-	/**
-	 * @param tP
-	 * @param baseKey
-	 */
-	private void setShelves(IProcedure tP, String key) {
-
-		String baseKey = key + ".shelf" ;
-		int nS = Integer.parseInt(config.getProperty(baseKey)) ;
-
-		for (int i = 1; i <= nS; i++) {
-
-			String tS = baseKey + "." + i ;
-
-			IShelf x = parseShelf(config.getProperty(tS)) ;
-
-			tP.register(x) ;
-		}
-
-	}
-
-	/**
-	 * 
-	 * @param configValue
-	 * @return
-	 */
-	private IShelf parseShelf(String configValue) {
-
-		StringTokenizer token = new StringTokenizer(configValue, ",") ;
-		String name = token.nextToken() ;
-		long capacity = Long.parseLong(token.nextToken()) ;
-		
-		return new Shelf( name, capacity ) ;
-	}
-
-	private IFactory parseFactory(String key) {
-
-		StringTokenizer token = new StringTokenizer(key, ",") ;
-
-		String name = token.nextToken() ;
-		int capacity = Integer.parseInt(token.nextToken()) ;
-
-		IFactory x = new Factory(name) ;
-		IWarehouse w = new Warehouse(x + "'s warehouse") ;
-		w.setCapacity(capacity) ;
-		x.register(w) ;
-
-		return x ;
-	}
-
-	private void setLabors(IFactory x, String key) {
-
-		String baseKey = key + ".labor" ;
-
-		int nL = Integer.parseInt(config.getProperty(baseKey)) ;
-
-		for (int i = 1; i <= nL; i++) {
-			String uniqueKey = baseKey + "." + i ;
-			ILabor labor = new Labor(uniqueKey) ;
-			x.register(labor) ;
-		}
-	}
-
+	
+	
 	// -----------------------------------------------------------------------
 	// Single test
 	// -----------------------------------------------------------------------
