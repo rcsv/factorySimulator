@@ -37,6 +37,10 @@ import org.rcsvp.factory.Status ;
  */
 public class Disposable implements IDisposable {
 
+	// -----------------------------------------------------------------------
+	// Private member fields
+	// -----------------------------------------------------------------------
+	
 	/**
 	 * disposable name
 	 */
@@ -67,16 +71,53 @@ public class Disposable implements IDisposable {
 	// -----------------------------------------------------------------------
 
 	/**
-	 * Construct with a argument: name.
+	 * Construct Disposable tool with two arguments: name and limit.
 	 * 
 	 * @param name
+	 * 		a name of disposable tools that equipped into IProcedure.
+	 * 		It should be unique in the factory.
+	 * @param limit
+	 * 		a use limit of dsposable tool. You must set unsigned integer
+	 * 		value.
 	 */
-	public Disposable(String name) {
+	public Disposable ( String name, long limit ) {
+		
 		this.name = name ;
-		this.count = 0 ;
-
-		this.status = Status.Ready ;
+		this.limit = limit ;
+		
+		initialize() ;
+		
 	}
+	
+	/**
+	 * Construct disposable tool with a argument: name. So you must send method
+	 * #setCapacity() before start fabrication.
+	 * 
+	 * @param name
+	 * 		a name of disposable tools that equipped into Procedure. It
+	 * 		should be unique in the factory.
+	 */
+	public Disposable ( String name ) {
+		
+		this.name = name ;
+		this.limit = 0 ;
+		
+		initialize() ;
+	}
+	
+	/**
+	 * common setting of constructors.
+	 */
+	private void initialize() {
+		
+		this.status = Status.Ready ;
+		this.count = 0 ;
+		
+	}
+	
+	// -----------------------------------------------------------------------
+	// Override methods
+	// -----------------------------------------------------------------------
 
 	@Override
 	public IStatus getStatus() {
@@ -97,6 +138,7 @@ public class Disposable implements IDisposable {
 	@Override
 	public void run() {
 		// It doesn't running as a thread.
+		throw new RuntimeException() ;
 	}
 
 	@Override
