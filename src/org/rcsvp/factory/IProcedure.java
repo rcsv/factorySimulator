@@ -30,4 +30,13 @@ public interface IProcedure extends IRegistrable, IStorable, IParent, ICare {
 	 */
 	int getOutputCount() ;
 
+	/**
+	 * register verification contents into Procedure.
+	 * 
+	 * @param verify
+	 *            a reference implemented IVerify.
+	 * @return if you add verification item return true.
+	 */
+	boolean register(IVerify verify) ;
+
 }
