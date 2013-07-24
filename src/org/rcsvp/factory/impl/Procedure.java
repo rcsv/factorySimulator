@@ -169,59 +169,59 @@ public class Procedure extends AbstFacilities implements IProcedure {
 	protected void routines() {
 
 	}
-	
+
 	@Override
 	protected void finishProcess() {
-		
+
 		//
 		// shutdown IStorable
 		//
 		Iterator<IStorable> iS = shelves.iterator() ;
-		
-		while ( iS.hasNext() ) {
-			
-			iS.next().shutdown( Status.ShutdownNormally ) ;
-			
+
+		while (iS.hasNext()) {
+
+			iS.next().shutdown(Status.ShutdownNormally) ;
+
 		}
-		
+
 		//
 		// shutdown IDisposable
 		//
 		Iterator<IDisposable> iD = dispos.iterator() ;
-		
-		while ( iD.hasNext() ) {
-			
-			iD.next().shutdown( Status.ShutdownNormally ) ;
+
+		while (iD.hasNext()) {
+
+			iD.next().shutdown(Status.ShutdownNormally) ;
 		}
-		
+
 	}
-	
+
 	@Override
-	public void setTactTime( long tactTime ) {
+	public void setTactTime(long tactTime) {
 		this.tactTime = tactTime ;
 	}
-	
+
 	@Override
 	public int getOutputCount() {
 		return this.output.size() ;
 	}
-	
+
 	@Override
 	public IMaterial getMaterial() {
-		
+
 		//
 		// change status Insufficient Material, when cannot get any IMaterial
 		//
-		if ( this.output.size() != 0 ) {
+		if (this.output.size() != 0) {
 			return this.output.remove() ;
 		}
-		
+
 		return null ;
 	}
-	
+
 	@Override
 	public boolean care() {
-	
+
 		this.status = Status.Ready ;
 		return true ;
 	}
@@ -239,5 +239,14 @@ public class Procedure extends AbstFacilities implements IProcedure {
 	@Override
 	public long setMaterials(long volume) {
 		return 0 ;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.rcsvp.factory.IProcedure#register(org.rcsvp.factory.IVerify)
+	 */
+	@Override
+	public boolean register(IVerify verify) {
+		this.checklist.add(verify) ;
+		return true ;
 	}
 }
